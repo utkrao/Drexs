@@ -1,0 +1,94 @@
+<app-certificate-wallet-tab-list [currentTab]="1" (mintDrexsNftEvent)="openModal()">
+</app-certificate-wallet-tab-list>
+
+<div class="content-tabs">
+
+  <div class="loader-wrap" *ngIf="loading">
+    <app-loader></app-loader>
+  </div>
+  <div class="tab-content" *ngIf="!loading">
+    <div class="tab-pane fade show active">
+
+      <ng-container *ngIf="!showData">
+        <div class="text-center py-4">
+          <div class="mb-4">
+            <img src="assets/img/gfx-connect-un-portal.svg" alt="Connect to UN Portal" />
+          </div>
+          <h5>Connect to UN Portal</h5>
+          <p>Connect to the UN Portal to implement to all the Renewable Energy <br />Certificate you have in the
+            registry</p>
+          <div class="d-flex justify-content-center mt-4">
+            <button class="btn btn-primary fix-width" (click)="showData=!showData"> Connect
+              <div class="btn-loader" *ngIf="loading"> </div>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="showData">
+        <div class="table-responsive">
+          <table class="table align-middle drex-table gray">
+            <thead>
+              <tr>
+
+                <th scope="col">Date of Import</th>
+                <th scope="col">Certificate ID</th>
+                <th scope="col">Energy Saving</th>
+                <th scope="col">Status</th>
+                <th scope="col">Header</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of [0,1,2,3,4,5]">
+                <td>23 Sep 2021</td>
+                <td>ID234AE4</td>
+                <td>1,200 Mw</td>
+                <td>Active</td>
+                <td>ID234AE4</td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <!-- <app-pagination
+                [pagination]="pagination"
+                [currentPage]="page"
+                (changePageEvent)="onPageChange($event)"
+                >
+                </app-pagination> -->
+
+      </ng-container>
+
+
+
+    </div>
+  </div>
+</div>
+
+<div class="modal-wrapper" *ngIf="showPopup">
+<div class="overlay" ></div>
+
+  <div class="modal">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Confirm Convert</h5>
+        <a class="close-button" (click)="closeModal()">&times;</a>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          Are you sure you want to convert the certificates to drexs NFTs. This action is not revereable.
+        </p>
+        <div class="d-flex">
+          <button class="btn btn-primary-outline shadow-none" (click)="closeModal()">No, Go Back</button>
+          <button type="button" class="btn btn-primary ms-3" (click)="proceed()">
+            Yes I'm sure <div class="btn-loader" *ngIf="loading"> </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

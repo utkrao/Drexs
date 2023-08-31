@@ -1,0 +1,14 @@
+.wrapper {
+    background-color: #F9F9F9;
+    border: 1px solid #E3E3E3;
+    overflow: hidden;
+}
+.main-content{
+    flex: 1 1 0%;
+    overflow: hidden;
+    position: relative;
+}
+.body-content{
+    overflow: auto;
+    height: 100%;
+}

@@ -1,0 +1,66 @@
+<div class="content-block card">
+    <div class="section-head">
+      
+    </div>
+    <div class="content-tabs">
+      
+        <div class="loader-wrap" *ngIf="loading">
+          <app-loader></app-loader>
+        </div>
+
+        <div class="card-head">
+          <app-stacked-drecs-filter></app-stacked-drecs-filter>
+        </div>
+
+        <div class="tab-content" *ngIf="!loading">
+          <div class="tab-pane fade show active">
+            <div class="table-responsive">
+              <table class="table align-middle drex-table gray">
+                <thead>
+                  <tr>
+                    <th>
+                      <input 
+                      type="checkbox" 
+                      class="form-check-input" id="item-all" 
+                      [(ngModel)]="allSelected"
+                      (ngModelChange)="onSelectAll($event)" >
+                    </th>
+                      <th scope="col">Stake ID</th>
+                      <th scope="col">Start Date</th>
+                      <th scope="col">Earnings</th>
+                      <th scope="col">Summary Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of myStacksDrecsList; index as i">
+                    <td>
+                      <input 
+                        [checked]="selectedIdList.includes(item.id)" 
+                        type="checkbox" 
+                        class="form-check-input" 
+                        id="item-{{item.id}}"
+                        (change)="onItemSelect($event, item.id)">
+                    </td>
+                    <td>{{item.stakeId}}</td>
+                    <td>{{item.startDate}}</td>
+                    <td>{{item.earnings}}</td>
+                    <td>
+                     <a href="{{item.summaryLink}}">Open Link</a>   
+                    </td>   
+                  </tr>
+                </tbody>
+              </table>
+           
+            </div>
+            <app-pagination
+              [pagination]="pagination"
+              [currentPage]="page"
+              (changePageEvent)="onPageChange($event)"
+              >
+              </app-pagination>
+            
+          </div>
+        </div>
+      </div>
+  </div>
+  

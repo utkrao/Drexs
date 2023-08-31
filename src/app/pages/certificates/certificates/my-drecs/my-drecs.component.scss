@@ -1,0 +1,195 @@
+    // --------- cards -----------
+
+    .marketplace-cards {
+        flex: 1;
+
+        >.marketplace-grid {
+            margin: 0 auto 10px;
+            width: calc(100% - 20px);
+            max-width: calc(100% - 20px);
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            row-gap: 30px;
+            column-gap: 20px;
+        }
+
+        .card {
+            position: relative;
+            width: 187px;
+            border-radius: 6px;
+            // margin: 0 22px 0 0;
+            // margin-bottom: 30px;
+
+            .marketplace-counts {
+                position: absolute;
+                top: 14px;
+                left: 15px;
+                padding: 3px 9px;
+                border-radius: 5px;
+                height: 24px;
+                background:#F7931A;
+                font-weight: 700;
+                font-size: 12px;
+                z-index: 1;
+            }
+
+            .selected-icon {
+                position: absolute;
+                z-index: 1;
+                display: flex;
+                justify-content: right;
+                height: 29px;
+                width: 29px;
+                left: 138px;
+                margin-top: 12px;
+                cursor: pointer;
+            }
+
+            .card-balance {
+                position: absolute;
+                z-index: 1;
+                display: flex;
+                justify-content: center;
+                height: 25px;
+                width: 37px;
+                left: 16px;
+                padding: 3px;
+                background-color: #e78709;
+                border-radius: 10%;
+                
+            }
+
+            .image {
+                margin: 5px;
+                position: relative;
+
+                >img {
+                    width: 100%;
+                }
+
+                .overlay {
+                    position: absolute;
+                    opacity: 0.5;
+                    top: 0;
+                    left: 0;
+                    background: gray;
+                    border-radius: 6px;
+                }
+            }
+
+            .content {
+                padding: 0 12px 10px;
+
+            }
+
+            .input-box {
+                height: 24px;
+                width: 58px;
+                border-radius: 6px;
+                border: 1px solid #D8D8D8;
+            }
+
+            img {
+                border-radius: 6px;
+            }
+
+            .title {
+                margin: 12px 0 0 0;
+                display: flex;
+                justify-content: space-between;
+
+                h1 {
+                    font-family: heebo;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 22.4px;
+                }
+
+                img {
+                    height: 18px;
+                    width: 18px;
+                }
+            }
+
+
+            .company {
+                margin-top: -10px;
+                display: flex;
+                width: 150px;
+                cursor: pointer;
+                line-height: 15.78px;
+                align-items: center;
+            }
+
+            .company h2 {
+                font-size: 12px;
+                color: #7E7E7E;
+                font-weight: 400;
+            }
+
+            .company img {
+                margin: -8px 0 0 0;
+            }
+
+            hr {
+                border: 0;
+                border-top: 1px solid rgba(0, 0, 0, 0.3);
+                margin: 3px -12px;
+                height: 1px;
+                background-color: transparent;
+            }
+
+            .bid {
+                display: flex;
+                margin: 5px 0;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .bid p {
+                font-size: 10px;
+                font-weight: 400;
+                font-family: heebo;
+                margin: 0;
+            }
+
+            .amount {
+                font-size: 12px;
+                flex-direction: flex-end;
+                font-weight: 500;
+                margin: 0;
+            }
+
+            .add-to-cart {
+                height: 30px;
+                width: 100%;
+                box-shadow: none;
+                font-size: 14px;
+                padding: 6px;
+            }
+        }
+    }
+
+    .nav.nav-pills {
+        margin: 20px 0;
+        gap: 20px;
+
+        li {
+            flex: 1;
+            background-color: rgba(#B7B7B7, .2);
+            color: #9B9B9B;
+            border-radius: 5px;
+
+            a {
+                text-align: center;
+            }
+
+            &.active a {
+                background-color: #009D94;
+                color: #FFFFFF;
+            }
+        }
+    }

@@ -1,0 +1,54 @@
+<div class="content-block card">
+    <div class="section-head">
+      
+    </div>
+    <div class="content-tabs">
+      
+        <div class="loader-wrap" *ngIf="loading">
+          <app-loader></app-loader>
+        </div>
+        <div class="tab-content" *ngIf="!loading">
+          <div class="tab-pane fade show active">
+            <div class="table-responsive">
+              <table class="table align-middle drex-table gray">
+                <thead>
+                  <tr>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Transaction Date</th>
+                      <th scope="col">Transaction Type</th>
+                      <th scope="col">Transaction Status</th>
+                      <th scope="col">Currency</th>
+                      <th scope="col">USD</th>
+                      <th scope="col">Details</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listData; index as i">
+                    <td>{{item.amount}}</td>
+                    <td>{{item.txnDate}}</td>
+                    <td>{{item.txnType}}</td>
+                    <td>{{item.txnStatus}}</td>
+                    <td>{{item.currency}}</td>
+                    <td>${{item.usd}}</td>
+
+                    <td>
+                     <a href="{{item.deatils}}">View</a>   
+                    </td>   
+                  </tr>
+                </tbody>
+              </table>
+           
+            </div>
+            <app-pagination
+              [pagination]="pagination"
+              [currentPage]="page"
+              (changePageEvent)="onPageChange($event)"
+              >
+              </app-pagination>
+            
+          </div>
+        </div>
+      </div>
+  </div>
+  

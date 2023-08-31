@@ -1,0 +1,64 @@
+@import "../../../../scss/variables";
+
+.btn-reset-link {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    text-decoration-line: underline;
+    color: $gray-base;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.view-semd-box {
+    background-color: $white;
+    border: 1px solid $wall-border;
+    box-shadow: 0px 0.25rem 1.5rem rgba(0, 0, 0, 0.07);
+    border-radius: 0.25rem;
+    padding: 2rem;
+    max-width: 480px;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.view-semd-list {
+    padding: 0;
+    margin: 0;
+
+    .view-semd-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: $black;
+        overflow: hidden;
+
+        &:not(:first-child) {
+            border-top: 1px solid $wall-border;
+        }
+
+        span{
+            padding-left: 1rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+}
+
+.view-semd-foot {
+    border-top: 1px solid $wall-border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: $black;
+}

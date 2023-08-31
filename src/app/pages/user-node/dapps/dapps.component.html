@@ -1,0 +1,51 @@
+<div class="us-home-wrapper">
+    <div class="d-flex">
+        <div class="col-12">
+            <div class="us-home-dashboard">
+        
+                <div class="us-marketplace">
+                    <h2 class="us-section-title">dApps</h2>
+                    <div class="row">
+                        
+                        <h5 class="us-section-title">Trending dApps</h5>
+
+                        <div class="col-md-15 col-sm-3" *ngFor="let item of trendingDAppsList">
+                            <div class="dapp-card">
+                                <div>
+                                    <img  [src]="item.imageUrl" alt="Wattcoin"/>
+                                </div>
+                                <div class="dapp-card-info">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        
+                        <h5 class="us-section-title">Top Charts</h5>
+
+                        <div class="col-md-15 col-sm-3" *ngFor="let item of topChartDAppsList">
+                            <div class="dapp-card">
+                                <div>
+                                    <img  [src]="item.imageUrl" alt="Wattcoin"/>
+                                </div>
+                                <div class="dapp-card-info">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+      
+        
+            </div>
+        </div>
+    
+    </div>
+</div>

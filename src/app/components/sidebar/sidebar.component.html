@@ -1,0 +1,30 @@
+<!-- <div [className]="walletType === 'userwallet' ? 'sidebar h-100 pe-0' : 'sidebar h-100'"> -->
+<div class="sidebar h-100">
+  <div class="d-flex flex-column h-100">
+    <div class="brand-name">
+      <a  class="text-center logo" (click)="goToHomePage()">
+        <img class="img-fluid" src="assets/img/drexs-logo.svg" alt="dRexs" />
+      </a>
+    </div>
+    <div [className]="walletType === 'userwallet' ? 'menu-user h-100' : 'menu h-100'">
+      <span>Menu</span>
+      <ul class="menubar list-unstyled">
+        <li *ngFor="let item of sidebarMenu; let i = index">
+          <a (click)="navigate(item.url, i)" [ngClass]="{'active': item.active}">
+           <img src="assets/icons/sidebar-icons/{{item.icon}}" alt="">
+            <span>{{item.name}}</span>
+          </a>
+          <ul class="submenu list-unstyled" [ngClass]="{'hide': !item.active}" *ngIf="item.child.length">
+            <li *ngFor="let c of item.child">
+              <a (click)="navigate(c.url, i)" [ngClass]="{'active': c.url == activeUrl}">{{c.name}}</a>
+  
+              <!-- <a [routerLink]="c.url"  routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                true}">{{c.name}}</a> -->
+  
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

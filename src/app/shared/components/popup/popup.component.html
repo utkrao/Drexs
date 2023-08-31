@@ -1,0 +1,55 @@
+<div class="modal-wrapper" *ngIf="isShow">
+  <div class="modal-container" [ngSwitch]="type">
+    <div class="modal-content" *ngSwitchCase="'saved-beneficiaries-popup'">
+      <div class="modal-head">
+        <button type="button" class="close-btn" (click)="close()">
+          <img src="assets/img/icon-close.svg" alt="Close" />
+        </button>
+        <h3>Saved Beneficiaries</h3>
+        <div class="search-box">
+          <input type="search" class="form-control" placeholder="Search Name or Address"
+            (ngModelChange)="this.termSub.next($event)" [(ngModel)]="term" name="term" id="terms" />
+          <img src="assets/img/icon-search.svg" alt="Search" />
+        </div>
+        <div class="beneficiaries-tools">
+          <span>{{count}} Saved Beneficiaries</span>
+          <select class="form-select" aria-label="Sort By" (change)="changeSorting($event)">
+            <option selected>Sort By</option>
+            <option value="asc">Accending</option>
+            <option value="desc">Decending</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="btn-loader" *ngIf="loading"> </div>
+
+        <ul  *ngIf="!loading" class="beneficiaries-list list-unstyled">
+          <li class="beneficiaries-item" *ngFor="let user of userListing">
+            <div class="short-name"></div>
+            <div class="details" >
+                <a (click)="selectUser(user)">
+                  <h4>{{user.name}}</h4>
+                </a>
+
+                <span>{{user.beneficiaryAddress}}</span>
+              
+            </div>
+            <a class="remove-link" (click)="removeUser(user)">Remove</a>
+          </li>
+
+          <li class="beneficiaries-item" *ngIf="userListing?.length == 0">
+
+            <div class="details" >
+                  <h4>No Results.</h4>              
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="modal-overlap"></div>
+</div>

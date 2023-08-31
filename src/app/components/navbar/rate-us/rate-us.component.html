@@ -1,0 +1,30 @@
+<div class="modal-wrapper" *ngIf="showRateUsPopup">
+  <div class="overlay"></div>
+
+  <div class="modal">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Rate Us</h5>
+        <a class="close-button" (click)="closePopup()">&times;</a>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          We work super hard to serve you better and would love to know how
+          would you rate our platform
+        </p>
+
+        <ng-container *ngFor="let rating of ratingNumbers">
+          <a (click)="selectRating(rating)">{{ rating }}</a>
+        </ng-container>
+
+        <button
+          type="button"
+          class="btn btn-primary w-100"
+          (click)="proceed()"
+          [disabled]="loading || !selectedRating"
+        >Submit<div class="btn-loader" *ngIf="loading"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

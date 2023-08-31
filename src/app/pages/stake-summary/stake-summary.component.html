@@ -1,0 +1,30 @@
+<div class="content-block">
+    <div class="section-head">
+      <button type="reset" class="btn-reset-link" (click)="back()">Go Back</button>
+      <h2>Stake Summary</h2>
+      <p>Here is the staking summary for you to review.</p>
+    </div>
+    <div class="view-semd-box">
+      <ul class="view-semd-list unstyled-list">
+        <li class="view-semd-item">
+          <label>Drexs Staked </label>
+          <span>{{data.drexsStacked}}</span>
+        </li>
+        <li class="view-semd-item">
+          <label>USD Value</label>
+          <span>${{data.amount}}</span>
+        </li>
+        <li class="view-semd-item">
+          <label>Energy</label>
+          <span>{{data.energy}} Mw</span>
+        </li>
+      </ul>
+      <div class="view-semd-foot">
+        <label>You Earn</label>
+        <span>${{data.total}}</span>
+      </div>
+      <button class="btn btn-primary w-100" (click)="process()">Process to Stake <div class="btn-loader" *ngIf="loading">
+        </div></button>
+    </div>
+  </div>
+  

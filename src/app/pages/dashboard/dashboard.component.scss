@@ -1,0 +1,87 @@
+@import '../../../scss/variables';
+
+.alert{
+    background-color: rgba(0, 157, 148, 0.1);
+    border: 0;
+    border-radius: 0.25rem;
+    padding: 1rem;
+
+    .alert-icon{
+        margin-top: 0.125rem;
+        margin-bottom: auto;
+    }
+}
+
+.alert-content{
+    margin-right: auto;
+    padding: 0 1rem 0 0.5rem;
+
+    h4{
+        font-weight: 700;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: $black;
+        margin: 0;
+    }
+    p{
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: $greay-light-700;
+        margin: 0;
+    }
+}
+
+.card{
+    border-color: $wall-border;
+    box-shadow: 0 0.25rem 1.5rem rgba(0, 0, 0, 0.07);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.card-head{
+    padding: 1rem;
+
+    h3{
+        font-weight: 500;
+        font-size: 1.125rem;
+        line-height: 1.625rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $black;
+        margin-bottom: 0.625rem;
+    }
+
+    p{
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.375rem;
+        color: $gray-base;
+        margin-bottom: 0;
+    }
+}
+
+.balance-card{
+
+    h6{
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.313rem;
+        color: $greay-light-500;
+    }
+
+    span{
+        display: block;
+        font-weight: 500;
+        font-size: 1.5rem;
+        line-height: 2.188rem;
+        letter-spacing: -0.02em;
+        color: $black;
+
+        sub{
+            font-size: 0.875rem;
+            line-height: 1.313rem;
+            bottom: 0;
+        }
+    }
+}

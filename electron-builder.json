@@ -1,0 +1,67 @@
+{
+  "productName": "Drex",
+  "appId": "com.drex.app",
+  "asar": false,
+  "copyright": "Copyright © 2022",  
+  "npmRebuild": true,
+  "electronDownload": {
+    "cache": ".electron"
+  },
+  "directories": {
+    "output": "release/",
+    "buildResources": "resources"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!*.code-workspace",
+    "!LICENSE.md",
+    "!package.json",
+    "!package-lock.json",
+    "!src/",
+    "!e2e/",
+    "!hooks/",
+    "!angular.json",
+    "!_config.yml",
+    "!karma.conf.js",
+    "!tsconfig.json",
+    "!tslint.json",
+    "!.angular",
+    ".electron",
+    ".github",
+    ".npmrc",
+    ".vscode",
+    "power-build/power_darwin_amd64"
+  ],
+
+  "asarUnpack": [
+    "./power-build/power_darwin_amd64"
+  ],
+  "win": {
+    "icon": "dist/assets/icons",
+    "target": [
+      "nsis"
+    ]
+  },
+  "nsis": {
+    "oneClick": true,
+    "perMachine": true,
+    "runAfterFinish": true,
+    "deleteAppDataOnUninstall": true
+  },
+  "mac": {
+   "icon": "dist/assets/icons",
+    "hardenedRuntime": false,
+    "gatekeeperAssess": false,    
+    "category": "public.app-category.productivity",        
+    "target": ["dmg", "zip"],
+    "type": "distribution",
+    "darkModeSupport": true        
+  },
+  "linux": {
+    "icon": "dist/assets/icons",
+    "target": [
+      "AppImage"
+    ]
+  }
+}

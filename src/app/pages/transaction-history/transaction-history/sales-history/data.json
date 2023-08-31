@@ -1,0 +1,33 @@
+[
+  {
+    "id": "0001", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+  },    
+  {
+      "id": "0002", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },    
+    {
+      "id": "0003", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },    
+    {
+      "id": "0004", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },    
+    {
+      "id": "0005", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },    
+    {
+      "id": "0006", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },    
+    {
+      "id": "0007", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },    
+    {
+      "id": "0008", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },  
+    {
+      "id": "0009", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    },    
+    {
+      "id": "0010", "amount": "1234.89", "date": "21 Sep 2022","type": "Solar", "quantity":"125"
+    }
+                                         
+]

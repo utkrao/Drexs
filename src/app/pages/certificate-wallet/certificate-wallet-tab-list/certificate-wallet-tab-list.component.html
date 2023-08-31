@@ -1,0 +1,29 @@
+<div class="content-tabs">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/pages/certificate-wallet/certificate-listing"
+                [ngClass]="{'active': currentTab == 1}" (click)="currentTab = 1">Certificate Listing</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/pages/certificate-wallet/minted" [ngClass]="{'active': currentTab == 2 }"
+                (click)="currentTab = 2">NFT Minted</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/pages/certificate-wallet/stacking-activities"
+                [ngClass]="{'active': currentTab == 3 }" (click)="currentTab = 3">Staking Activities</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/pages/certificate-wallet/stacking-history"
+                [ngClass]="{'active': currentTab == 4 }" (click)="currentTab = 4">Staking History</a>
+        </li>
+
+        <li class="nav-item">
+            <button *ngIf="currentTab == 1" class="btn btn-primary btn-sm light" (click)="mintDrexsNft()">Mint dRexs NFT</button>
+            <button *ngIf="currentTab == 2" class="btn btn-primary btn-sm light" (click)="stakeDrexsNft()">Stake dRexs NFT</button>
+        </li>
+
+    </ul>
+
+</div>

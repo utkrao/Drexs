@@ -1,0 +1,97 @@
+<div class="text-center py-3 border-bottom">
+  <a [routerLink]="['/auth/landing']">
+    <img src="assets/img/drexs-logo.svg" alt="dRexs" />
+  </a>
+</div>
+<div class="mnemonic-container">
+  <div class="mnemonic-content">
+    <div class="mnemonic-head border-bottom d-flex justify-content-between align-items-center">
+      <h1>Mnemonic Key</h1>
+      <a [routerLink]="['/auth/wallet-protect']" routerLinkActive="router-link-active" class="btn btn-link btn-lg">Go
+        Back</a>
+    </div>
+    <div class="mnemonic-body">
+      <!-- Step 01 -->
+      <div class="intro" *ngIf="state === 'intro'">
+        <h3>What is a mnemonic key?</h3>
+        <p>
+          A mnemonic sentence (“mnemonic code”, “seed phrase”, “seed words”) is a way of representing a large
+          randomly-generated number as a sequence of words, making it easier for humans to store. These words are then
+          used to create a seed, which can be used for generating extended keys in a hierarchical deterministic wallet.
+        </p>
+        <h4>Here is an example for you:</h4>
+        <div class="wall">
+          <span>balloon</span>
+          <span>marmalade</span>
+          <span>rotate</span>
+          <span>umbrella</span>
+          <span>elephant</span>
+          <span>bounce</span>
+          <span>never</span>
+          <span>winner</span>
+          <span>helicopter</span>
+        </div>
+        <p>
+          As you can see, all of the words that star in this list are actually unrelated to one another. However, they
+          need to be recited in the correct order for access to be granted. The rationale behind mnemonic phrases is
+          that it makes it far easier to humans to remember important information, in a way that’s more understandable
+          than wallet addresses filled with random numbers and letters.
+        </p>
+        <button (click)="createCode()" class="btn btn-primary btn-lg">Create Seed Phrase</button>
+      </div>
+      <!-- Step 02 -->
+      <div class="create" *ngIf="state === 'create'">
+        <h2>Write down your mnemonic</h2>
+        <p>You'll confirm this sequence on the next screen</p>
+        <div class="mnemonic-card">
+          <ol>
+            <li *ngFor="let item of codeArray">{{ item }}</li>
+          </ol>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="conformation" [value]="written" (change)="checked()">
+          <label class="form-check-label" for="conformation">
+            Please write down these 9 words (order is important) on a paper and store it in a secure place. This seed is
+            only way to recover your wallet. Never disclose your seed to anyone and Do not store it electronically.
+          </label>
+        </div>
+        <br />
+        <button (click)="verifyCode()" class="btn btn-primary btn-lg fix-width" [disabled]="!written">Next</button>
+      </div>
+      <!-- Step 03 -->
+      <div class="verify" *ngIf="state === 'verify'">
+        <h4> Verify your mnemonic </h4>
+        <p> Arranged the shuffled words in the correct order. </p>
+        <ol class="drop-zone">
+          <li class="drop-zone-area" dndDropzone (dndStart)="onDragStart($event)" (dndDrop)="onDrop($event)"
+            [dndDraggable]="{ name: item, index: i, self: true }" [dndEffectAllowed]="'all'" [dndDisableIf]="false"
+            *ngFor="let item of putCode; let i = index;">
+            <div class="putcode" [id]="i">
+              <span *ngIf="item" class="shufflecode">{{item}}</span>
+            </div>
+          </li>
+        </ol>
+        <div class="drag-zone">
+          <div class="drag-zone-area" (dndStart)="onDragStart($event)" [dndDraggable]="{ name: item, index: i }"
+            [dndEffectAllowed]="'all'" [dndDisableIf]="false" *ngFor="let item of shuffleCode; let i = index;">
+            <div class="shufflecode">{{item}}</div>
+          </div>
+        </div>
+        <div *ngIf="isVerified" class="alert alert-success" role="alert">
+          <img class="right-icon" src="assets/img/success.png" alt="dRexs" /> Mnemonic order verified.
+        </div>
+        <div *ngIf="!isVerified" class="d-flex justify-content-between">
+          <button (click)="startOver()" class="btn btn-primary-outline btn-lg fix-width"> Start over </button>
+          <button (click)="confirmCode()" class="btn btn-primary btn-lg fix-width"> Confirm <div class="btn-loader"
+              *ngIf="loading"> </div>
+          </button>
+        </div>
+        <div *ngIf="isVerified" class="d-flex justify-content-between btn-left">
+          <button (click)="goToNext()" class="btn btn-primary btn-lg fix-width"> Confirm <div class="btn-loader"
+              *ngIf="loading"> </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

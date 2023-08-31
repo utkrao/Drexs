@@ -1,0 +1,20 @@
+<div class="d-flex align-items-start justify-content-center p-4">
+  <div class="card">
+    <div class="card-header">
+      Transaction PIN
+    </div>
+    <div class="card-body">
+      <p class="card-text">Please enter your transaction PIN to complete this transaction</p>
+      <div class="otp-wrapper text-center">
+        <ng-otp-input (onInputChange)="pinChange($event)" [config]="config"></ng-otp-input>
+      </div>
+      <button type="button" class="btn btn-primary w-100" (click)="proceed()" [disabled]="disabled">
+        Proceed <div class="btn-loader" *ngIf="loading"> </div>
+      </button>
+      <br />
+      <button class="btn btn-link btn-lg text-secondary text-decoration-underline w-100"
+      (click)="onForgotPin()">Forgot PIN</button>
+
+    </div>
+  </div>
+</div>

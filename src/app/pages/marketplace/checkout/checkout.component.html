@@ -1,0 +1,131 @@
+<div class="content-block">
+  <div class="loader-wrap" *ngIf="loading">
+    <app-loader></app-loader>
+  </div>
+
+  <div class="d-flex" *ngIf="!loading">
+    <div class="col-md-7">
+      <div class="section-head">
+        <a
+          [routerLink]="['/pages/marketplace']"
+          [queryParams]="{ action: 'buy' }"
+          class="btn-goback"
+          >Go Back</a
+        >
+
+        <h2 class="mt-4">Checkout</h2>
+      </div>
+
+        <div class="view-summary-box">
+          <div class="row">
+            <div class="col-6">
+              <button
+                class="w-100"
+                (click)="selectOption(1)"
+                [ngClass]="
+                  selectedOption == 1 ? 'btn btn-primary' : 'btn btn-secondary'
+                "
+              >
+                Buy
+              </button>
+            </div>
+            <div class="col-6">
+              <button
+                class="w-100"
+                (click)="selectOption(2)"
+                [ngClass]="
+                  selectedOption == 2 ? 'btn btn-primary' : 'btn btn-secondary'
+                "
+              >
+                Bid
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="selectedOption == 1">
+            <ul class="view-summary-list unstyled-list">
+              <li class="view-summary-item">
+                <label>Total Items</label>
+                <span>{{ cardData?.totalItems }}</span>
+              </li>
+              <li class="view-summary-item">
+                <label>Total Cost</label>
+                <span>${{ cardData?.totalCost }} USD</span>
+              </li>
+              <li class="view-summary-item">
+                <label>Avg Unit Cost</label>
+                <span>${{ cardData?.avgUnitCost }} USD</span>
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="selectedOption == 2">
+            <h6 class="choose-price">Choose Price</h6>
+            <div class="enter-items">
+              <input numbersOnly type="text" name="totalCount" placeholder="Enter Amount" />
+              <button>USD</button>
+            </div>
+            <h6 class="choose-price">Time Limit</h6>
+            <div class="d-flex">
+              <div class="select-time-dd">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>00</option>
+                  <option
+                    [value]="item"
+                    *ngFor="let item of createRange(1, 30); let i = index"
+                  >
+                    {{ item }}
+                  </option>
+                </select>
+                <p class="select-time">Days</p>
+              </div>
+              <div class="select-time-dd">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>00</option>
+                  <option
+                    [value]="item"
+                    *ngFor="let item of createRange(1, 23); let i = index"
+                  >
+                    {{ item }}
+                  </option>
+                </select>
+                <p class="select-time">Hours</p>
+              </div>
+              <div class="select-time-dd">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>00</option>
+                  <option
+                    [value]="item"
+                    *ngFor="let item of createRange(1, 59); let i = index"
+                  >
+                    {{ item }}
+                  </option>
+                </select>
+                <p class="select-time">Mins</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="view-summary-foot">
+                                <label>Amount Payable</label>
+                                <span>$111</span>
+                            </div> -->
+
+          <button
+            *ngIf="selectedOption == 1"
+            class="btn btn-primary w-100 margin-btn-top"
+            (click)="processToPayment()"
+          >
+            Proceed to Payment
+          </button>
+          <button
+            *ngIf="selectedOption == 2"
+            class="btn btn-primary w-100 margin-btn-top"
+            (click)="makeAnOffer()"
+          >
+            Make an Offer
+          </button>
+        </div>
+    </div>
+  </div>
+</div>

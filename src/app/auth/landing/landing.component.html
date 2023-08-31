@@ -1,0 +1,30 @@
+<div class="body-wrapper h-100">
+  <div class="main-content h-100 d-flex flex-column justify-content-center align-items-center">
+    <!-- Select Wallet -->
+    <div class="wallets-options-wrap">
+      <div class="wallets-head text-center">
+        <img src="assets/img/drexs-logo-text.svg" alt="dRexs" />
+        <span>Wallets</span>
+      </div>
+      <div class="wallets-body">
+        <h3>Choose the wallet you would like to Sign Up/Login to :</h3>
+        <div class="wallets-options">
+          <div class="wallets-item d-flex align-items-start" (click)="navigate('masternode')">
+            <img class="icon" src="assets/img/icon-masternode-wallet.svg" alt="Masternode Wallet" />
+            <div class="wallets-summary">
+              <h4>Masternode Wallet</h4>
+              <p>It is a long established fact that a reader will be distracted by the readable content </p>
+            </div>
+          </div>
+          <div class="wallets-item d-flex align-items-start" (click)="navigate('usernode')">
+            <img class="icon" src="assets/img/icon-basic-user-wallet.svg" alt="Basic User Wallet" />
+            <div class="wallets-summary">
+              <h4>Basic User Wallet</h4>
+              <p>It is a long established fact that a reader will be distracted by the readable content </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

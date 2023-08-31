@@ -1,0 +1,43 @@
+<div class="content-block">
+  <div class="section-head">
+    <a [routerLink]="['/pages/profile']" class="btn-reset-link">Back</a>
+    <h2>Update Profile</h2>
+  </div>
+  <div class="view-semd-box">
+    <form class="onboarding-form" [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm)">
+
+      <div class="mb-3">
+        <label for="name" class="form-label"
+          [ngClass]="{'text-danger': profileForm.get('name').invalid && (profileForm.get('name').dirty || profileForm.get('name').touched)}">Name</label>
+        <input id="name" type="text"
+          [ngClass]="{'is-invalid': profileForm.get('name').invalid && (profileForm.get('name').dirty || profileForm.get('name').touched)}"
+          formControlName="name" class="form-control" placeholder="name">
+        <div class="text-danger error-msg"
+          *ngIf="profileForm.get('name').invalid && (profileForm.get('name').dirty || profileForm.get('name').touched)">
+          Name is required
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="email" class="form-label"
+          [ngClass]="{'text-danger': profileForm.get('email').invalid && (profileForm.get('email').dirty || profileForm.get('email').touched)}">
+          Email</label>
+        <input id="email"
+          [ngClass]="{'is-invalid': profileForm.get('email').invalid && (profileForm.get('email').dirty || profileForm.get('email').touched)}"
+          formControlName="email" class="form-control" placeholder="Enter email">
+        <div class="text-danger error-msg"
+          *ngIf="profileForm.get('email').errors?.required && (profileForm.get('email').dirty || profileForm.get('email').touched)">
+          Email is required
+        </div>
+        <div class="text-danger error-msg"
+          *ngIf="profileForm.get('email').errors?.email && (profileForm.get('email').dirty || profileForm.get('email').touched)">
+          Email is Invalid
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="profileForm.invalid">
+        Update <div class="btn-loader" *ngIf="loading"> </div>
+      </button>
+    </form>
+  </div>
+</div>

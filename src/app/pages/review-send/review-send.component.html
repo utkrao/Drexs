@@ -1,0 +1,33 @@
+<div class="content-block">
+  <div class="section-head">
+    <a [routerLink] = "['/pages/my-wallet']" [queryParams] = "{action: 'send'}" class="btn-reset-link">Go Back</a>
+    <h2>Review Send</h2>
+    <p>Here is the sending summary for you to review.</p>
+  </div>
+  <div class="view-semd-box">
+    <ul class="view-semd-list unstyled-list">
+      <li class="view-semd-item">
+        <label>To </label>
+        <span>{{data.toAddress}}</span>
+      </li>
+      <li class="view-semd-item">
+        <label>Sending Amount</label>
+        <span>{{data.amount}} {{data.coinCode}}</span>
+      </li>
+      <!-- <li class="view-semd-item">
+        <label>Drexs Fee</label>
+        <span> WATT</span>
+      </li> -->
+      <li class="view-semd-item">
+        <label>Network Fee</label>
+        <span>{{feeConfig.transactionFee || 0}} {{data.coinCode}}</span>
+      </li>
+    </ul>
+    <div class="view-semd-foot">
+      <label>Total Sending</label>
+      <span>{{total}} {{data.coinCode}}</span>
+    </div>
+    <button class="btn btn-primary w-100" (click)="process()">Process to Send <div class="btn-loader" *ngIf="loading">
+      </div></button>
+  </div>
+</div>

@@ -1,0 +1,497 @@
+<div class="container-full">
+  <div class="head" [ngClass]="{ 'company-head-height': selectedCompany }">
+    <div *ngIf="selectedCompany" class="company-head">
+      <div class="companey-card-content">
+        <div class="company-icon">
+          <img [src]="selectedCompany.image" alt="" />
+        </div>
+        <div>
+          <h1>{{ selectedCompany.name }}</h1>
+          <p>{{ selectedCompany.totalDrecs }} DRECs</p>
+        </div>
+      </div>
+      <div class="companey-close-icon">
+        <span (click)="selectedCompany = null"></span>
+      </div>
+    </div>
+
+    <div class="top-bar" [ngClass]="{ 'company-top-bar': selectedCompany }">
+      <div class="d-flex ms-auto">
+        <div class="search-bar mb-3">
+          <div class="search-icon">
+            <img src="assets/img/marketplace/search-icon.svg" alt="" />
+          </div>
+          <input
+            class="text-area form-control"
+            [(ngModel)]="serachText"
+            (ngModelChange)="onSearch()"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+        <div class="sort-dd-style">
+          <ng-select
+            bindLabel="label"
+            placeholder="Sort by"
+            [searchable]="false"
+            [clearable]="false"
+            bindValue="value"
+            [(ngModel)]="sortBy"
+            [items]="SortListBy"
+            (ngModelChange)="applySortBy()"
+          >
+          </ng-select>
+        </div>
+
+        <div class="filter-dd-style">
+          <div class="filter-input-dropdown" (click)="toggleFilter()">
+            Filter
+          </div>
+          <div class="filter-dropdown" *ngIf="showFilter">
+            <!-- Filter dropdown content -->
+
+            <form [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
+              <div class="filter-form-controls">
+                <div>
+                  <div>
+                    <h1>Price Range</h1>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="input-group">
+                          <input
+                            placeholder="Min"
+                            numbersOnly
+                            type="text"
+                            formControlName="minPrice"
+                            class="filter-input"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="input-group">
+                          <input
+                            placeholder="Max"
+                            numbersOnly
+                            type="text"
+                            formControlName="maxPrice"
+                            class="filter-input"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="input-group">
+                          <ng-select
+                            class="price-type"
+                            bindLabel="label"
+                            bindValue="value"
+                            [searchable]="false"
+                            [clearable]="false"
+                            [items]="priceTypeList"
+                            formControlName="priceType"
+                          >
+                          </ng-select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+
+                <div>
+                  <div>
+                    <h1>Technology</h1>
+                  </div>
+
+                  <div class="input-group">
+                    <div
+                      class="mb-3 form-check"
+                      *ngFor="let techObj of technologyList; let i = index"
+                    >
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="{{ techObj.label }}"
+                        [value]="techObj.value"
+                        (change)="onTechnologyChange($event)"
+                        [checked]="
+                          filterForm.controls.selectedTechnology.value.includes(
+                            techObj.value
+                          )
+                        "
+                      />
+                      <label class="form-check-label" for="{{ techObj.label }}">
+                        {{ techObj.label }}
+                      </label>
+                    </div>
+                  </div>
+
+                  <hr />
+                </div>
+
+                <div>
+                  <h1>Issue Date</h1>
+                  <div class="row dash-between">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <div class="input-group calender">
+                          <ng2-flatpickr
+                            placeholder="From"
+                            formControlName="issueFromDate"
+                            [config]="datepickerOptions"
+                          ></ng2-flatpickr>
+                          <span class="input-suffix border-0">
+                            <img src="assets/img/icon-calender.svg" alt="" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <div class="input-group calender">
+                          <ng2-flatpickr
+                            placeholder="To"
+                            formControlName="issueToDate"
+                            [config]="datepickerOptions"
+                          ></ng2-flatpickr>
+                          <span class="input-suffix border-0">
+                            <img src="assets/img/icon-calender.svg" alt="" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+
+                <div>
+                  <h1>Expiry Month</h1>
+
+                  <div class="row dash-between">
+                    <div class="col-6">
+                      <div class="form-group">
+                      <div class="input-group calender">
+                        <ng-select
+                          placeholder="From"
+                          [searchable]="false"
+                          [clearable]="false"
+                          formControlName="expiryFromMonth"
+                          [items]="monthList"
+                          bindLabel="label"
+                          bindValue="value"
+                        >
+                        </ng-select>
+                        <span class="input-suffix border-0">
+                          <img src="assets/img/icon-calender.svg" alt="" />
+                        </span>
+                      </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6">
+                      <div class="form-group">
+                      <div class="input-group calender">
+                        <ng-select
+                          bindLabel="label"
+                          bindValue="value"
+                          placeholder="To"
+                          [searchable]="false"
+                          [clearable]="false"
+                          [items]="monthList"
+                          formControlName="expiryToMonth"
+                        >
+                        </ng-select>
+                        <span class="input-suffix border-0">
+                          <img src="assets/img/icon-calender.svg" alt="" />
+                        </span>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+
+                <div>
+                  <div>
+                    <h1>Country of Issue</h1>
+                  </div>
+                  <div class="input-group">
+                    <div
+                      class="mb-3 form-check"
+                      *ngFor="let countryObj of countryList"
+                    >
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="{{ countryObj.label }}"
+                        [value]="countryObj.value"
+                        (change)="onCountryChange($event)"
+                        [checked]="
+                          filterForm.controls.selectedCountry.value.includes(
+                            countryObj.value
+                          )
+                        "
+                      />
+                      <label
+                        class="form-check-label"
+                        for="{{ countryObj.label }}"
+                      >
+                        {{ countryObj.label }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-footer">
+                <div class="row">
+                  <div class="col-6">
+                    <button
+                      type="button"
+                      (click)="resetFilter()"
+                      class="btn btn-secondary"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                  <div class="col-6">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="
+                        !(
+                          filterForm.get('minPrice').value ||
+                          filterForm.get('maxPrice').value ||
+                          filterForm.get('issueFromDate').value ||
+                          filterForm.get('issueToDate').value ||
+                          filterForm.get('expiryFromMonth').value ||
+                          filterForm.get('expiryToMonth').value ||
+                          filterForm.get('selectedTechnology').value.length ||
+                          filterForm.get('selectedCountry').value.length
+                        )
+                      "
+                    >
+                      Apply Filter
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="status">
+        <div class="d-flex flex-wrap gap-3">
+
+          <ng-container *ngIf="selectedFilters.length">            
+            <ng-container *ngFor="let ele of selectedFilters">
+              <ng-container *ngIf="['selectedCountry','selectedTechnology'].includes(ele.field);else elseBlock">
+
+                <button (click)="removeFilter(ele.field, item.value)" class="filter-selected-item btn" *ngFor="let item of ele.value">
+                  {{item.label}} <img src="assets\img\icon-close.svg" alt="" class="ms-2">
+                </button>
+
+              </ng-container>
+              <ng-template #elseBlock>
+                <button (click)="removeFilter(ele.field, ele.value)" class="filter-selected-item btn">
+                  {{ele.label}} : {{ele.value}} &times;
+                </button>
+              </ng-template>
+            </ng-container>
+            <button class="filter-clear btn"  (click)="resetFilter()" >Clear All</button>
+          </ng-container>
+
+          <div class="d-flex align-items-center" *ngIf="!selectedFilters.length">
+            <div class="live-image"></div>
+            <p class="live-p">Live Feed</p>
+          </div>
+          <div class="seperator-dot">
+            <img src="assets/img/marketplace/dot_small.svg" alt="" />
+          </div>
+          <p>{{ marketplaceCardList.length }} results</p>
+          <div class="seperator-dot">
+            <img src="assets/img/marketplace/dot_small.svg" alt="" />
+          </div>
+          <div class="update-symbol">
+            <img src="assets/img/marketplace/update_icon.svg" alt="" />
+          </div>
+          <p class="status-p">Updated 10 sec ago</p>
+        </div>
+        <!-- <button class="btn btn-link"></button> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container-full">
+    <div
+      class="marketplace-cards"
+      [ngClass]="{ 'company-margin-cards': selectedCompany }"
+    >
+      <div class="marketplace-grid">
+        <div
+          *ngFor="let marketplaceCard of marketplaceCardList"
+          class="marketplace-card d-flex justify-content-center"
+        >
+          <div class="card">
+            <img
+              class="selected-icon"
+              (click)="onSelectCard(marketplaceCard)"
+              [src]="
+                selectedCardIdList.includes(marketplaceCard.id)
+                  ? 'assets/img/marketplace/item-selection.svg'
+                  : 'assets/img/marketplace/item-selected.svg'
+              "
+              alt=""
+            />
+            <div class="image">
+              <img [src]="marketplaceCard.image" alt="" />
+              <div
+                class="overlay h-100 w-100"
+                *ngIf="selectedCardIdList.includes(marketplaceCard.id)"
+              ></div>
+            </div>
+            <div class="content">
+              <div class="title">
+                <h1>{{ marketplaceCard.title }}</h1>
+                <img [src]="marketplaceCard.countryFlag" alt="" />
+              </div>
+              <div
+                class="company"
+                (click)="selectCompany(marketplaceCard.company)"
+              >
+                <h2>{{ marketplaceCard.company.name }}</h2>
+                <img src="assets/img/marketplace/arrow.svg" alt="" />
+              </div>
+              <hr class="hr-color" />
+              <div class="bid">
+                <p>YOUR PRICE</p>
+                <div class="amount">${{ marketplaceCard.price }} USD</div>
+              </div>
+              <button
+                class="add-to-cart btn btn-primary"
+                (click)="onSelectCard(marketplaceCard)"
+              >
+                {{
+                  selectedCardIdList.includes(marketplaceCard.id)
+                    ? "Remove from Cart"
+                    : "Add to Cart"
+                }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="right-sidebar"
+      [ngClass]="{ 'company-margin-right-sidebar': selectedCompany }"
+    >
+      <div class="sidebar-container">
+        <div class="sweep-box">
+          <div class="sweep-head">
+            <h1>Sweep Mode</h1>
+            <div class="items-usd">
+              <button
+                (click)="selectSweepOption(1)"
+                [ngClass]="selectedSweepOption == 1 ? 'items' : 'usd'"
+              >
+                Items
+              </button>
+              <button
+                (click)="selectSweepOption(2)"
+                [ngClass]="selectedSweepOption == 2 ? 'items' : 'usd'"
+              >
+                USD
+              </button>
+            </div>
+          </div>
+          <div class="total">
+            <h1>Total {{ selectedSweepOption == 1 ? "Items" : "USD" }}</h1>
+            <form>
+              <div class="form-group">
+                <input
+                  type="range"
+                  name="range"
+                  id="Bar"
+                  [min]="getMinSweepValue()"
+                  [max]="getMaxSweepValue()"
+                  size="200px"
+                  [(ngModel)]="sweepValue"
+                  (ngModelChange)="updateSweepModeValue()"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="form-group">
+            <input
+              disabled
+              type="text"
+              name="totalCount"
+              [value]="sweepValue"
+              class="form-control"
+              placeholder="Enter {{
+                selectedSweepOption == 1 ? 'Items' : 'USD'
+              }}"
+            />
+            <button class="btn btn-sm btn-secondary input-suffix">
+              {{ selectedSweepOption == 1 ? "Items" : "USD" }}
+            </button>
+          </div>
+        </div>
+
+        <div class="my-cart">
+          <div class="cart-head">
+            <div class="d-flex">
+              <h1 class="cart-text">My Cart</h1>
+              <div class="item-count">{{ cartList.length }}</div>
+            </div>
+            <h1 class="cart-clear" (click)="clearCart()">Clear Cart</h1>
+          </div>
+
+          <div class="cart-box">
+            <ng-container *ngFor="let cartItem of cartList">
+              <div class="cart-item">
+                <div class="details">
+                  <img [src]="cartItem.image" alt="" />
+                  <div class="item-content">
+                    <h1>{{ cartItem.title }}</h1>
+                    <p>{{ cartItem.company.name }}</p>
+                  </div>
+                </div>
+                <div class="item-amount">
+                  <h1>${{ cartItem.price }} USD</h1>
+                  <p>$ 2.8K</p>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="cartList.length == 0">
+              <div class="empty-full">
+                <img src="assets/img/marketplace/cart_empty.svg" alt="" />
+                <div class="empty">Cart Empty</div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="cart-total">
+            <div class="total-cost">
+              <h1>Total Cost</h1>
+              <p>${{ getTotalCost() }} USD</p>
+            </div>
+            <div class="avg-cost">
+              <h1>Avg Unit Cost</h1>
+              <p>${{ getAvgUnitCost() }} USD</p>
+            </div>
+          </div>
+        </div>
+        <button
+          [disabled]="!cartList.length"
+          class="btn btn-primary proceed-btn"
+          (click)="goToCheckout()"
+        >
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

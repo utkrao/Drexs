@@ -1,0 +1,19 @@
+<div class="content-tabs card">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" (click)="currentTab = 1" routerLink="/pages/my-wallet/my-assets" [ngClass]="{'active': currentTab == 1}">
+                My Assets</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" (click)="currentTab = 2" routerLink="/pages/my-wallet/my-collectibles" [ngClass]="{'active': currentTab == 2 }">
+                My Collectibles
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" (click)="currentTab = 3" routerLink="/pages/my-wallet/transaction-history"
+                [ngClass]="{'active': currentTab == 3}">Transaction History</a>
+        </li>
+    </ul>
+</div>

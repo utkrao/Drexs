@@ -1,0 +1,29 @@
+@import '../../../../scss/variables';
+
+.dialog-success-container{
+    max-width: 524px;
+    width: 100%;
+    margin: 0 auto;
+}
+.dialog-success-content{
+    background-color: $white;
+    border: 1px solid $wall-border;
+    border-radius: 0.25rem;
+    padding: 3rem;
+    margin: 4rem auto;
+
+    h3{
+        font-weight: 500;
+        font-size: 1.5rem;
+        line-height: 2.188rem;
+        color: $black;
+        margin: 3rem auto 1rem;
+    }
+
+    p{
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: $gray-base;
+        margin: 1rem auto 3rem;
+    }
+}

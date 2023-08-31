@@ -1,0 +1,112 @@
+<div class="d-flex align-items-start justify-content-center p-4" [ngSwitch]="type">
+  <div class="card" *ngSwitchCase="'transaction-success'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Transaction Successful!</h3>
+      <p class="card-text">Your transaction was successful. You can see the transaction details in the transaction
+        history screen inside My Wallet</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/my-wallet')">Go to My Wallet</button>
+      <br />
+      <button class="btn btn-link btn-sm text-secondary text-decoration-underline w-100"
+        (click)="navigate('/pages/transaction-history/wallet-history')">See transaction details</button>
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase="'transaction-failed'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-close.svg" alt="failed" />
+      <h3>Transaction Failed!</h3>
+      <p class="card-text">Your transaction was failed.</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/my-wallet')">Go to My Wallet</button>
+      <br />
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase="'staking-success'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Staking Successful!</h3>
+      <p class="card-text">Your staking was successful. You can see the progress details in the staking
+        activities inside Certificate Wallet</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/certificate-wallet')">Go to Staking Activities</button>
+      <br />
+      <button class="btn btn-link btn-sm text-secondary text-decoration-underline w-100"
+        (click)="navigate('/pages/certificate-wallet')">Go to Certificate Wallet</button>
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase="'staking-failed'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-close.svg" alt="failed" />
+      <h3>Staking Failed!</h3>
+      <p class="card-text">Your staking was failed.</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/certificate-wallet')">Go to Certificate Wallet</button>
+      <br />
+    </div>
+  </div>
+
+  
+
+  <div class="card" *ngSwitchCase="'swap-success'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Transaction Successful!</h3>
+      <p class="card-text">Your transaction was successful. You can see the transaction details in the transaction
+        history screen inside My Wallet</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/my-wallet')">Go to My Wallet</button>
+      <br />
+      <button class="btn btn-link btn-sm text-secondary text-decoration-underline w-100"
+        (click)="navigate('/pages/transaction-history/wallet-history')">See transaction details</button>
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase="'swap-failed'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-close.svg" alt="failed" />
+      <h3>Transaction Failed!</h3>
+      <p class="card-text">Your transaction was failed.</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/my-wallet')">Go to My Wallet</button>
+      <br />
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase="'bidding-successfull'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Bidding Successful!</h3>
+      <p class="card-text">Your bidding offer was sent successful to the owner. You will get notification once the owner accepts your offer.</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/marketplace')">Go to Marketplace</button>
+      <br />
+      <button class="btn btn-link btn-lg text-secondary text-decoration-underline w-100"
+        (click)="navigate('/pages/transaction-history/wallet-history')">See transaction details</button>
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase="'purchase-successfull'">
+    <div class="card-body text-center">
+      <img class="my-4" src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Purchase Successfull!</h3>
+      <p class="card-text">Your purchase was successfull. You can see the transaction details in the transaction history tab</p>
+      <br />
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/marketplace')">Go to My DRECs</button>
+      <br />
+      <button class="btn btn-link btn-lg text-secondary text-decoration-underline w-100"
+        (click)="navigate('/pages/transaction-history/wallet-history')">See transaction details</button>
+    </div>
+  </div>
+
+
+</div>

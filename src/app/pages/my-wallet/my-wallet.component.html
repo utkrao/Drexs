@@ -1,0 +1,30 @@
+<!-- <div class="content-block">
+    <div class="section-head">
+        <h2>My Wallet</h2>
+        <p>Here inside my wallet is my assets and transaction history</p>
+    </div>
+        <router-outlet> </router-outlet>
+</div> -->
+
+<div class="content-block">
+  
+    <div class="content-tabs card">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/my-wallet/balances"
+                    [ngClass]="{'active': currentTab == 1}" (click)="currentTab = 1">Balances
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/my-wallet/energy" [ngClass]="{'active': currentTab == 2 }"
+                    (click)="currentTab = 2"> Energy
+                </a>
+            </li>
+        </ul>
+    
+    </div>
+    
+    <router-outlet> </router-outlet>
+
+  </div>
+  

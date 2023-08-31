@@ -1,0 +1,882 @@
+<div class="content-block">
+  <div class="loader-wrap" *ngIf="loading">
+    <app-loader></app-loader>
+  </div>
+
+  <div class="row" *ngIf="!loading">
+    <div class="col-md-7">
+      <div class="section-head">
+        <button
+          *ngIf="isPurchasePayment()"
+          class="btn-goback"
+          type="button"
+          (click)="onBack()"
+        >
+          Go Back
+        </button>
+        <a
+          *ngIf="isCoinBuyPayment()"
+          [routerLink]="['/pages/my-wallet']"
+          [queryParams]="{ action: 'buy' }"
+          class="btn-goback"
+          >Go Back</a
+        >
+
+        <h2>Payment</h2>
+        <p>Choose a card from your saved list or add a new card</p>
+      </div>
+      <div class="cards-wrapper row">
+        <div class="col-md-6">
+          <div
+            (click)="selectPaymentByOption(BY_CREDIT_DEBIT_CARD)"
+            class="card-button debit-bank-card"
+            [ngClass]="{
+              active: selectedPaymentByOption == BY_CREDIT_DEBIT_CARD
+            }"
+          >
+            <img
+              src="assets/img/icon-card-view.svg"
+              class="deb-img"
+              alt="Icon"
+            />
+            <span>Debit/Credit Card</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div
+            (click)="selectPaymentByOption(BY_BANK_TRANSFER)"
+            *ngIf="isPurchasePayment()"
+            class="card-button debit-bank-card"
+            [ngClass]="{ active: selectedPaymentByOption == BY_BANK_TRANSFER }"
+          >
+            <img src="assets/img/marketplace/bank-transfer.svg" alt="Icon" />
+            <span>Bank Transfer</span>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div
+            (click)="selectPaymentByOption(BY_WALLET)"
+            *ngIf="isPurchasePayment()"
+            class="card-button wallet-card"
+            [ngClass]="{ active: selectedPaymentByOption == BY_WALLET }"
+          >
+            <span>Wallet Balance</span>
+            <span>$1000</span>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div
+            *ngIf="selectedPaymentByOption == BY_CREDIT_DEBIT_CARD"
+            class="cards-block"
+          >
+            <ng-container *ngIf="savedCardList.length">
+              <h4>Saved Cards</h4>
+              <div class="saved-cards-list">
+                <div
+                  class="saved-cards-item"
+                  *ngFor="let cardObj of savedCardList"
+                >
+                  <label>
+                    <input
+                      name="cards"
+                      class="cards-radio"
+                      type="radio"
+                      (click)="selectCard(cardObj)"
+                    />
+                    <span class="saved-cards d-flex justify-content-between">
+                      <span class="cards-radio-checked"></span>
+                      <span class="cards-details flex-grow-1">
+                        <span class="d-flex align-items-center">
+                          <span class="cards-type">{{ cardObj.name }}</span>
+                          <span class="cards-expiry"
+                            >{{ cardObj.expiryMonth }}/{{
+                              cardObj.expiryYear
+                            }}</span
+                          >
+                        </span>
+                        <span class="cards-no"
+                          >Card No - **** **** **** {{ cardObj.last4 }}</span
+                        >
+                      </span>
+                      <input
+                        numbersOnly
+                        *ngIf="selectedCard?.cardId == cardObj.cardId"
+                        name="CVV"
+                        placeholder="CVV"
+                        class="form-control"
+                        type="password"
+                        minlength="3"
+                        maxlength="3"
+                        [(ngModel)]="cardCvv"
+                      />
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </ng-container>
+
+            <div class="new-card-block">
+              <div
+                class="new-card-head d-flex justify-content-between align-items-center"
+              >
+                <h4>Add New Card</h4>
+                <button
+                  (click)="openAddNewCardForm()"
+                  *ngIf="!showAddNewCardForm"
+                  type="button"
+                  class="remove-card"
+                >
+                  <img src="assets/img/chevron-right.svg" alt="Minus" />
+                </button>
+                <button
+                  (click)="closeAddNewCardForm()"
+                  *ngIf="showAddNewCardForm"
+                  type="button"
+                  class="remove-card"
+                >
+                  <img src="assets/img/icon-minus.svg" alt="Minus" />
+                </button>
+              </div>
+              <form
+                *ngIf="showAddNewCardForm"
+                class="add-newcard-form"
+                [formGroup]="newCardForm"
+                (ngSubmit)="onSubmit(newCardForm)"
+              >
+                <div class="mb-3">
+                  <label class="form-label"
+                    >Card Number
+                    <span
+                      class="text-danger error-msg"
+                      *ngIf="
+                        newCardForm.get('card_no').errors?.required &&
+                        (newCardForm.get('card_no').dirty ||
+                          newCardForm.get('card_no').touched)
+                      "
+                    >
+                      Required
+                    </span>
+                  </label>
+                  <div class="input-group">
+                    <input
+                      (keyup)="checkCardType($event)"
+                      numbersOnly
+                      maxlength="19"
+                      type="text"
+                      pattern="[0-9]*"
+                      class="form-control"
+                      formControlName="card_no"
+                      placeholder="1234 1234 1234 1234"
+                      [ngClass]="{
+                        'is-invalid':
+                          newCardForm.get('card_no').invalid &&
+                          (newCardForm.get('card_no').dirty ||
+                            newCardForm.get('card_no').touched)
+                      }"
+                    />
+                    <span class="input-group-text" id="basic-addon3">
+                      <span *ngIf="cardType">
+                        <img
+                          *ngIf="cardType == 'VISA'"
+                          class="card-name"
+                          src="assets/img/bank-visa-card.svg"
+                          alt="Visa"
+                        />
+                        <img
+                          *ngIf="cardType == 'MASTERCARD'"
+                          class="card-name"
+                          src="assets/img/bank-master-card.svg"
+                          alt="Master"
+                        />
+                        <img
+                          *ngIf="cardType == 'AMEX'"
+                          class="card-name"
+                          src="assets/img/bank-amex-card.svg"
+                          alt="Amex"
+                        />
+                        <img
+                          *ngIf="cardType == 'DISCOVER'"
+                          class="card-name"
+                          src="assets/img/bank-discover-card.svg"
+                          alt="Discover"
+                        />
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >Expiry Date
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('expiry_date').errors?.required &&
+                            (newCardForm.get('expiry_date').dirty ||
+                              newCardForm.get('expiry_date').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        numbersOnly
+                        (keyup)="updateExpiryDate($event)"
+                        class="form-control"
+                        formControlName="expiry_date"
+                        placeholder="MM / YY"
+                        minlength="5"
+                        maxlength="5"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('expiry_date').invalid &&
+                            (newCardForm.get('expiry_date').dirty ||
+                              newCardForm.get('expiry_date').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >CVV
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('cvv').errors?.required &&
+                            (newCardForm.get('cvv').dirty ||
+                              newCardForm.get('cvv').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        numbersOnly
+                        class="form-control"
+                        formControlName="cvv"
+                        placeholder="CVV"
+                        type="password"
+                        minlength="3"
+                        maxlength="3"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('cvv').invalid &&
+                            (newCardForm.get('cvv').dirty ||
+                              newCardForm.get('cvv').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!--  -->
+
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >First Name
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('name').errors?.required &&
+                            (newCardForm.get('name').dirty ||
+                              newCardForm.get('name').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="name"
+                        placeholder="First Name"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('name').invalid &&
+                            (newCardForm.get('name').dirty ||
+                              newCardForm.get('name').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >Last Name
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('last_name').errors?.required &&
+                            (newCardForm.get('last_name').dirty ||
+                              newCardForm.get('last_name').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="last_name"
+                        placeholder="Last Name"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('last_name').invalid &&
+                            (newCardForm.get('last_name').dirty ||
+                              newCardForm.get('last_name').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >Address line 1
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('line1').errors?.required &&
+                            (newCardForm.get('line1').dirty ||
+                              newCardForm.get('line1').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="line1"
+                        placeholder="Address line 1"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('line1').invalid &&
+                            (newCardForm.get('line1').dirty ||
+                              newCardForm.get('line1').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >Address line 2
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('line2').errors?.required &&
+                            (newCardForm.get('line2').dirty ||
+                              newCardForm.get('line2').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="line2"
+                        placeholder="Address line 2"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('line2').invalid &&
+                            (newCardForm.get('line2').dirty ||
+                              newCardForm.get('line2').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >City
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('city').errors?.required &&
+                            (newCardForm.get('city').dirty ||
+                              newCardForm.get('city').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="city"
+                        placeholder="City"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('city').invalid &&
+                            (newCardForm.get('city').dirty ||
+                              newCardForm.get('city').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >Country
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('country').errors?.required &&
+                            (newCardForm.get('country').dirty ||
+                              newCardForm.get('country').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+
+                      <ng-select
+                        [items]="countryList"
+                        bindLabel="name"
+                        bindValue="code"
+                        [placeholder]="'Please select a country...'"
+                        formControlName="country"
+                        [searchable]="false"
+                        (change)="onCountryChange()"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('country').invalid &&
+                            (newCardForm.get('country').dirty ||
+                              newCardForm.get('country').touched)
+                        }"
+                      >
+                      </ng-select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div *ngIf="showDistrictDrp" class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >District
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('district').errors?.required &&
+                            (newCardForm.get('district').dirty ||
+                              newCardForm.get('district').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+
+                      <ng-select
+                        [items]="dictrictList"
+                        bindLabel="name"
+                        bindValue="code"
+                        [placeholder]="'Please select a district...'"
+                        formControlName="district"
+                        [searchable]="false"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('district').invalid &&
+                            (newCardForm.get('district').dirty ||
+                              newCardForm.get('district').touched)
+                        }"
+                      >
+                      </ng-select>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="mb-3">
+                      <label class="form-label"
+                        >Postal Code
+                        <span
+                          class="text-danger error-msg"
+                          *ngIf="
+                            newCardForm.get('postal_code').errors?.required &&
+                            (newCardForm.get('postal_code').dirty ||
+                              newCardForm.get('postal_code').touched)
+                          "
+                        >
+                          Required
+                        </span>
+                      </label>
+                      <input
+                        type="text"
+                        maxlength="10"
+                        class="form-control"
+                        formControlName="postal_code"
+                        placeholder="Postal Code"
+                        [ngClass]="{
+                          'is-invalid':
+                            newCardForm.get('postal_code').invalid &&
+                            (newCardForm.get('postal_code').dirty ||
+                              newCardForm.get('postal_code').touched)
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="cardLoader"
+                >
+                  + Add Card
+                  <div class="btn-loader" *ngIf="cardLoader"></div>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div
+            *ngIf="selectedPaymentByOption == BY_BANK_TRANSFER"
+            class="cards-block"
+          >
+            <ng-container *ngIf="savedAccountList.length">
+              <h4>Saved Accounts</h4>
+              <div class="saved-cards-list">
+                <div
+                  class="saved-cards-item"
+                  *ngFor="let accountObj of savedAccountList"
+                >
+                  <label>
+                    <input
+                      name="cards"
+                      class="cards-radio"
+                      type="radio"
+                      (click)="selectAccount(accountObj)"
+                    />
+                    <span class="saved-cards d-flex justify-content-between">
+                      <span class="cards-radio-checked"></span>
+                      <span class="cards-details flex-grow-1">
+                        <span class="d-flex align-items-center">
+                          <span class="cards-type">{{ accountObj.bankName }}</span>
+                        </span>
+                        <span class="cards-no">
+                          Account Number - {{ accountObj.accountNumber }}
+                        </span>
+                        <span class="pull-right">
+                          {{accountObj.accountHolderName}}
+                        </span>
+                      </span>
+                      
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </ng-container>
+
+            <!-- <div class="new-card-block">
+                        <div class="new-card-head d-flex justify-content-between align-items-center">
+                            <h4>Add New Account</h4>
+                            <button (click)="openAddNewCardForm()" *ngIf="!showAddNewCardForm" type="button"
+                                class="remove-card">
+                                <img src="assets/img/chevron-right.svg" alt="Minus" />
+                            </button>
+                            <button (click)="closeAddNewCardForm()" *ngIf="showAddNewCardForm" type="button"
+                                class="remove-card">
+                                <img src="assets/img/icon-minus.svg" alt="Minus" />
+                            </button>
+                        </div>
+                        <!-- <form *ngIf="showAddNewCardForm" class="add-newcard-form" [formGroup]="newCardForm"
+                            (ngSubmit)="onSubmit(newCardForm)">
+                            <div class="mb-3">
+                                <label class="form-label">Card Number
+                                    <span class="text-danger error-msg"
+                                        *ngIf="newCardForm.get('card_no').errors?.required && (newCardForm.get('card_no').dirty || newCardForm.get('card_no').touched)">
+                                        Required
+                                    </span>
+                                </label>
+                                <div class="input-group">
+                                    <input  (keyup)="checkCardType($event)" numbersOnly  maxlength="19" type="text" pattern="[0-9]*"
+                                        class="form-control" formControlName="card_no" placeholder="1234 1234 1234 1234"
+                                        [ngClass]="{'is-invalid': newCardForm.get('card_no').invalid && (newCardForm.get('card_no').dirty || newCardForm.get('card_no').touched)}" />
+                                    <span class="input-group-text" id="basic-addon3">
+                                        <span *ngIf="cardType">
+                                            <img *ngIf="cardType == 'VISA' " class="card-name"
+                                                src="assets/img/bank-visa-card.svg" alt="Visa" />
+                                            <img *ngIf="cardType == 'MASTERCARD' " class="card-name"
+                                                src="assets/img/bank-master-card.svg" alt="Master" />
+                                            <img *ngIf="cardType == 'AMEX' " class="card-name"
+                                                src="assets/img/bank-amex-card.svg" alt="Amex" />
+                                            <img *ngIf="cardType == 'DISCOVER' " class="card-name"
+                                                src="assets/img/bank-discover-card.svg" alt="Discover" />
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">Expiry Date
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('expiry_date').errors?.required && (newCardForm.get('expiry_date').dirty || newCardForm.get('expiry_date').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" numbersOnly (keyup)="updateExpiryDate($event)" class="form-control"
+                                            formControlName="expiry_date" placeholder="MM / YY" minlength="5"
+                                            maxlength="5"
+                                            [ngClass]="{'is-invalid': newCardForm.get('expiry_date').invalid && (newCardForm.get('expiry_date').dirty || newCardForm.get('expiry_date').touched)}" />
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">CVV
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('cvv').errors?.required && (newCardForm.get('cvv').dirty || newCardForm.get('cvv').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" numbersOnly class="form-control" formControlName="cvv" placeholder="CVV"
+                                            type="password" minlength="3" maxlength="3"
+                                            [ngClass]="{'is-invalid': newCardForm.get('cvv').invalid && (newCardForm.get('cvv').dirty || newCardForm.get('cvv').touched)}" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">First Name
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('name').errors?.required && (newCardForm.get('name').dirty || newCardForm.get('name').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="name"
+                                            placeholder="First Name"
+                                            [ngClass]="{'is-invalid': newCardForm.get('name').invalid && (newCardForm.get('name').dirty || newCardForm.get('name').touched)}" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">Last Name
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('last_name').errors?.required && (newCardForm.get('last_name').dirty || newCardForm.get('last_name').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="last_name"
+                                            placeholder="Last Name"
+                                            [ngClass]="{'is-invalid': newCardForm.get('last_name').invalid && (newCardForm.get('last_name').dirty || newCardForm.get('last_name').touched)}" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">Address line 1
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('line1').errors?.required && (newCardForm.get('line1').dirty || newCardForm.get('line1').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="line1"
+                                            placeholder="Address line 1"
+                                            [ngClass]="{'is-invalid': newCardForm.get('line1').invalid && (newCardForm.get('line1').dirty || newCardForm.get('line1').touched)}" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">Address line 2
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('line2').errors?.required && (newCardForm.get('line2').dirty || newCardForm.get('line2').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="line2"
+                                            placeholder="Address line 2"
+                                            [ngClass]="{'is-invalid': newCardForm.get('line2').invalid && (newCardForm.get('line2').dirty || newCardForm.get('line2').touched)}" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">City
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('city').errors?.required && (newCardForm.get('city').dirty || newCardForm.get('city').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="city"
+                                            placeholder="City"
+                                            [ngClass]="{'is-invalid': newCardForm.get('city').invalid && (newCardForm.get('city').dirty || newCardForm.get('city').touched)}" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+                           
+
+                            <div class="row">
+
+    
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">Country
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('country').errors?.required && (newCardForm.get('country').dirty || newCardForm.get('country').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+
+                                        <ng-select [items]="countryList" 
+                                                bindLabel="name" 
+                                                bindValue="code" 
+                                                [placeholder]="'Please select a country...'"
+                                                formControlName="country"
+                                                [searchable]="false"
+                                                (change)="onCountryChange()"
+                                                [ngClass]="{'is-invalid': newCardForm.get('country').invalid && (newCardForm.get('country').dirty || newCardForm.get('country').touched)}" 
+                                                >
+                                        </ng-select>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div *ngIf="showDistrictDrp" class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">District
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('district').errors?.required && (newCardForm.get('district').dirty || newCardForm.get('district').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+
+                                        <ng-select [items]="dictrictList" 
+                                            bindLabel="name" 
+                                            bindValue="code" 
+                                            [placeholder]="'Please select a district...'"
+                                            formControlName="district"
+                                            [searchable]="false"
+                                            [ngClass]="{'is-invalid': newCardForm.get('district').invalid && (newCardForm.get('district').dirty || newCardForm.get('district').touched)}" 
+                                            >
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">Postal Code
+                                            <span class="text-danger error-msg"
+                                                *ngIf="newCardForm.get('postal_code').errors?.required && (newCardForm.get('postal_code').dirty || newCardForm.get('postal_code').touched)">
+                                                Required
+                                            </span>
+
+                                        </label>
+                                        <input type="text" maxlength="10" class="form-control" formControlName="postal_code"
+                                            placeholder="Postal Code"
+                                            [ngClass]="{'is-invalid': newCardForm.get('postal_code').invalid && (newCardForm.get('postal_code').dirty || newCardForm.get('postal_code').touched)}" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary"  [disabled]="cardLoader">
+                                + Add Card
+                                <div class="btn-loader" *ngIf="cardLoader"> </div>
+                            </button>
+                            
+                        </form>
+                    </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="view-semd-box">
+        <h2>Purchase Summary</h2>
+        <!-- <p>Here inside my wallet is my assets and transaction history</p> -->
+        <ul class="view-semd-list unstyled-list">
+          <li class="view-semd-item">
+            <label>Paying Amount</label>
+            <span>${{ purchaseSummary.paying_amount | number: "1.2-2" }}</span>
+          </li>
+          <li class="view-semd-item">
+            <label>Network Fee</label>
+            <span>${{ purchaseSummary.network_fee | number: "1.2-2" }}</span>
+          </li>
+          <!-- <li class="view-semd-item">
+                        <label>Drexs Fee</label>
+                        <span>${{purchaseSummary.drexs_fee| number : '1.2-2'}}</span>
+                    </li> -->
+        </ul>
+        <div class="view-semd-foot">
+          <label>Amount Payable</label>
+          <span>${{ purchaseSummary.amount_payable | number: "1.2-2" }}</span>
+        </div>
+        <button
+          *ngIf="isCoinBuyPayment()"
+          [disabled]="!selectedCard || !cardCvv"
+          (click)="processToBuy()"
+          class="btn btn-primary w-100"
+        >
+          Proceed to Buy
+        </button>
+
+        <button
+          *ngIf="isPurchasePayment()"
+          [disabled]="!canProcessTOPurchase()"
+          (click)="processToPurchase()"
+          class="btn btn-primary w-100"
+        >
+          Proceed to Purchase
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

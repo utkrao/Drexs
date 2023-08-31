@@ -1,0 +1,36 @@
+<div class="content-block">
+    <div class="section-head">
+      <a [routerLink] = "['/pages/my-wallet']" [queryParams] = "{action: 'swap'}" class="btn-reset-link">Go Back</a>
+      <h2>Review Swap</h2>
+      <p>Here is the swapping summary for you to review.</p>
+    </div>
+    <div class="view-semd-box">
+      <ul class="view-semd-list unstyled-list">
+        <li class="view-semd-item">
+          <label>Amount in WATT</label>
+          <span>{{swapData.amount}}</span>
+        </li>
+        <li class="view-semd-item">
+          <label>Swap To</label>
+          <span> 
+            {{getCoinTitle(data.coinCode)}} {{data.coinCode}}
+          </span>
+        </li>
+        <li class="view-semd-item">
+          <label>To Receive</label>
+          <span> {{swapData.swap_amount}} {{data.coinCode}}</span>
+        </li>
+        <li class="view-semd-item">
+          <label>Network Fee</label>
+          <span>{{feeConfig.transactionFee || 0}} WATT</span>
+        </li>
+      </ul>
+      <div class="view-semd-foot">
+        <label>Total Swap</label>
+        <span>{{total}} {{data.coinCode}}</span>
+      </div>
+      <button class="btn btn-primary w-100" (click)="process()">Proceed to Swap <div class="btn-loader" *ngIf="loading">
+        </div></button>
+    </div>
+  </div>
+  

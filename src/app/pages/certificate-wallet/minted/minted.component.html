@@ -1,0 +1,65 @@
+<app-certificate-wallet-tab-list
+  [currentTab]="2"
+  (stakeDrexsNftEvent)="openModal()"
+>
+</app-certificate-wallet-tab-list>
+
+<div class="content-tabs">
+  <div class="loader-wrap" *ngIf="loading">
+    <app-loader></app-loader>
+  </div>
+  <div class="tab-content" *ngIf="!loading">
+    <div class="tab-pane fade show active"></div>
+  </div>
+</div>
+
+<div class="modal-wrapper" *ngIf="showPopup">
+  <div class="overlay"></div>
+
+  <div class="modal">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Set Stake</h5>
+        <p>
+          Set your number of drexs NFT to be staked against energy and the
+          staking period here
+        </p>
+        <a class="close-button" (click)="closeModal()">&times;</a>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label"> Drexs NFT to be staked </label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Amount"
+              />
+              <span class="input-group-text">NFT</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Energy staked against DREXS </label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Energy Unit"
+              />
+              <span class="input-group-text">mW</span>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <button type="button" class="btn btn-primary" (click)="proceed()">
+              Review Stake
+              <div class="btn-loader" *ngIf="loading"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

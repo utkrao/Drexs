@@ -1,0 +1,80 @@
+<nav class="navbar">
+  <div class="d-flex align-items-center ms-auto">
+    <div>
+      Drecs ID : Drecs0073947389535 
+    </div>
+    <div class="notification">
+      <button (click)="toggleNotificationPopup()" class="btn btn-link btn-lg">
+        <img class="img-fluid" src="assets/img/icon-notification.svg" alt="Icon" />
+      </button>
+      <app-notification  [showModal]="showNotification" (closeEvent)="showNotification=false"></app-notification>
+    </div>
+    <div class="profile ms-1">
+      <button (click)="togglePopup()" class="profile-menu">
+        <span>{{name}}</span>
+        <small>{{name[0]}}</small>
+      </button>
+
+      <div class="profile-menu-modal" [ngClass]="{'show': showDropdown}">
+        <div class="profile-menu-head">
+          <small>{{name[0]}}</small>
+          <span>{{name}}</span>
+        </div>
+        <ul class="profile-menu-body list-unstyled">
+          <li>
+            <a [routerLink]="['/pages/profile']" (click)="togglePopup()" >
+              <img src="assets/img/icon-profile.svg" alt="Profile" />
+              <span>My Profile</span>
+            </a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/pages/messages']" (click)="togglePopup()" >
+              <img src="assets/img/icon-faqs.svg" alt="Messages" />
+              <span>Messages</span>
+            </a>
+          </li>
+
+          <li>
+            <a [routerLink]="['/pages/contact-us']" (click)="togglePopup()" >
+              <img src="assets/img/icon-help-support.svg" alt="Contact us" />
+              <span>Contact us</span>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="">
+              <img src="assets/img/icon-settings.svg" alt="Settings" />
+              <span>Notification Settings</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <img src="assets/img/icon-faqs.svg" alt="FAQs" />
+              <span>FAQs</span>
+            </a>
+          </li>
+
+          <li>
+            <a  (click)="openRateUs()">
+              <img src="assets/img/icon-faqs.svg" alt="Rate Us" />
+              <span>Rate Us</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="">
+              <img src="assets/img/icon-help-support.svg" alt="Help & Support" />
+              <span>Help & Support</span>
+            </a>
+          </li> -->
+        </ul>
+        <div class="profile-menu-foot">
+          <a class="btn btn-sm btn-primary-outline shadow-none" (click)="logout()">Signout</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<app-rate-us [showRateUsPopup]="showRateUsPopup" (closeEvent)="showRateUsPopup=false"></app-rate-us>

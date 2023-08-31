@@ -1,0 +1,83 @@
+@import '../../../../scss/variables';
+.profile-card {
+    overflow: auto;
+  .cover-image {
+    height: 10rem;
+    display: block;
+  }
+  .profile-header {
+    padding: 0 1rem;
+    background: transparent;
+    bottom: 1.7rem;
+    overflow: hidden;
+    .profile-pic {
+      display: block;
+      height: 8rem;
+      width: 8rem;
+      border: 7px solid white;
+      border-radius: 50%;
+      box-shadow: 0px 2px 10px 0px rgb(0 0 0 / 15%);
+      margin: 0 1rem;
+    }
+    .details {
+        margin-top: 1rem;
+      span {
+        color: #676767;
+      }
+      .id {
+        img {
+          height: 1.2rem;
+          margin-left: 0.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  @media(max-width: 768px){
+    .profile-header{
+        justify-content: center !important;
+    }
+  }
+  .actions{
+    button{
+        padding: 0.3rem 1rem !important;
+        height: fit-content;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    .cancel{
+        border-color: #C6C6C6 !important;
+        color: #000;
+    }
+    .save{
+        border: 1px solid #009D94;
+    }
+  }
+}
+
+    .information-item{
+        display: flex;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid $wall-border;
+
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+
+        &:last-child,&:nth-last-child(2){
+            border-bottom: 0;
+        }
+        .info-label{
+            margin-right: 0.3rem;
+            color: $greay-light-700;
+        }
+
+        .info-value{
+            font-weight: 500;
+            color: $black;
+        }
+        img{
+            margin-left: 0.3rem;
+            cursor: pointer;
+        }
+    }

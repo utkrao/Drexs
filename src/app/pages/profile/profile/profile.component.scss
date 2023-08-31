@@ -1,0 +1,114 @@
+@import '../../../../scss/variables';
+
+@import '../../../shared/components/modal/modal.component.scss';
+
+.card-wall{
+    background-color: $white;
+    border: 1px solid $wall-border;
+    box-shadow: 0 0.25rem 1.5rem rgb(0 0 0 / 7%);
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+}
+
+.card-wall-head{
+    padding: 2rem 1.5rem 1rem 1.5rem; 
+
+    h3{
+        font-size: 1rem;
+        font-weight: 600;
+        color: $black;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin: 0;
+    }
+}
+
+.information-list{
+
+    .information-item{
+        display: flex;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid $wall-border;
+
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+
+        &:first-child{
+            border-top: 0;
+        }
+
+        .info-label{
+            color: $greay-light-700;
+        }
+
+        .info-value{
+            font-weight: 500;
+            color: $black;
+
+            &.verified{
+                display: flex;
+                align-items: center;
+
+                img{
+                    margin-right: 0.25rem;
+                }
+            }
+        }
+    }
+}
+
+
+
+.content-block {
+    position: relative;
+    padding: 20px 30px;
+  }
+  
+  .btn-loader {
+    position: absolute;
+    left: 50%;
+    transform: translate(-9px, -9px);
+  }
+  
+  .content-tabs {
+    margin-top: 0;
+    margin-bottom: 10px;
+    height: 54px;
+  
+    .nav-pills {
+      margin-bottom: 0;
+      height: 100%;
+  
+  
+      .nav-item {
+        height: 100%;
+        flex: 1;
+  
+        a {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          color: #4D4D4D;
+  
+          &.active {
+            background-color: transparent;
+            color: #009D94;
+  
+            &::after {
+              content: '';
+              position: absolute;
+              height: 2px;
+              width: calc(100% - 20px);
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              background-color: #009D94;
+            }
+          }
+        }
+      }
+    }
+  }

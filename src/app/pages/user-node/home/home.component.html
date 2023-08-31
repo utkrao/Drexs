@@ -1,0 +1,133 @@
+<div class="us-home-wrapper">
+    <div class="d-flex">
+        <div class="col-8">
+            <div class="us-home-dashboard">
+
+                <div class="us-featured-block">
+                    <div class="us-featured-content">
+                        <h2>dRex aims to bring sustainablity into blockchain </h2>
+                        <p><strong>dRex</strong> aims to bring sustainablity into blockchain </p>
+                        <img src="assets/img/featured-img.png" alt="Featured"/>
+                    </div>
+                    <h3>Be a part of sustainable future</h3>
+                    <a class="us-featured-action" href="#">
+                        <img src="assets/img/icon-arrow-big.svg" alt="Arrow"/>
+                    </a>
+                </div>
+        
+                <div class="us-marketplace">
+                    <h2 class="us-section-title">Marketplace</h2>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="marketplace-card">
+                                <div class="d-flex">
+                                    <img class="marketplace-icon" src="assets/img/wtc-icon.svg" alt="Wattcoin"/>
+                                    <div class="marketplace-info">
+                                        <h3>WTC</h3>
+                                        <h4>Wattcoin</h4>
+                                    </div>
+                                </div>
+                                <div class="marketplace-position">
+                                    <span>$8,445.21</span>
+                                    <small class="green">+ 9.44%</small>
+                                </div>
+                                <div class="marketplace-chart">
+                                    <img src="assets/img/marketplace-chart-green.svg" alt="chart" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="marketplace-card">
+                                <div class="d-flex">
+                                    <img class="marketplace-icon" src="assets/img/btc-icon.svg" alt="Bitcoin"/>
+                                    <div class="marketplace-info">
+                                        <h3>BTC</h3>
+                                        <h4>Bitcoin</h4>
+                                    </div>
+                                </div>
+                                <div class="marketplace-position">
+                                    <span>$23.5443</span>
+                                    <small class="red">- 0.13%</small>
+                                </div>
+                                <div class="marketplace-chart">
+                                    <img src="assets/img/marketplace-chart-red.svg" alt="chart" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="marketplace-card">
+                                <div class="d-flex">
+                                    <img class="marketplace-icon" src="assets/img/eth-icon.svg" alt="Ethereum"/>
+                                    <div class="marketplace-info">
+                                        <h3>ETH</h3>
+                                        <h4>Ethereum</h4>
+                                    </div>
+                                </div>
+                                <div class="marketplace-position">
+                                    <span>$193</span>
+                                    <small class="green">+ 9.44%</small>
+                                </div>
+                                <div class="marketplace-chart">
+                                    <img src="assets/img/marketplace-chart-green.svg" alt="chart" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="marketplace-card">
+                                <div class="d-flex">
+                                    <img class="marketplace-icon" src="assets/img/drx-icon.svg" alt="Drexs NFT"/>
+                                    <div class="marketplace-info">
+                                        <h3>DRX</h3>
+                                        <h4>Drexs NFT</h4>
+                                    </div>
+                                </div>
+                                <div class="marketplace-position">
+                                    <span>$369</span>
+                                    <small class="red">- 0.13%</small>
+                                </div>
+                                <div class="marketplace-chart">
+                                    <img src="assets/img/marketplace-chart-red.svg" alt="chart" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        
+                <div class="us-understanding">
+                    <h2 class="us-section-title">Understanding DREXS</h2>
+                    <div class="us-understanding-frame">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/Ata9cSC2WpM?rel=0" title="YouTube video" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="us-home-news h-100">
+                <h2>News & Announcement</h2>
+                <ng-container *ngFor="let news of announcementList">
+                    <div class="us-home-news-item">
+                        <div class="d-flex">
+                            <div class="us-news-content">
+                                <h3>
+                                    {{news.title}}
+                                </h3>
+                                <span>{{news.date}} | {{news.readingTime}}</span> 
+                            </div>
+                            <div class="us-news-thumbnail">
+                                <img [src]="news.imageUrl" alt="Cinque Terre">
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

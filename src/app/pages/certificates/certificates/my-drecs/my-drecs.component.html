@@ -1,0 +1,79 @@
+<div class="container-full">
+
+    <div class="content-tabs">
+        <ul class="nav nav-pills">
+            <li class="nav-item" [ngClass]="{'active': selectedCardIdList.length }">
+                <a class="nav-link" [ngClass]="{'active': selectedCardIdList.length }"
+                    (click)="openActionAlert(1)">List</a>
+            </li>
+            <li class="nav-item" [ngClass]="{'active': selectedCardIdList.length }">
+                <a class="nav-link" [ngClass]="{'active': selectedCardIdList.length }"
+                    (click)="openActionAlert(2)">Delist</a>
+            </li>
+
+            <li class="nav-item " [ngClass]="{'active': selectedCardIdList.length }">
+                <a class="nav-link" [ngClass]="{'active': selectedCardIdList.length }"
+                    (click)="openActionAlert(3)">Stake</a>
+            </li>
+
+            <li class="nav-item" [ngClass]="{'active': selectedCardIdList.length }">
+                <a class="nav-link" [ngClass]="{'active': selectedCardIdList.length }"
+                    (click)="openActionAlert(4)">Unstake</a>
+            </li>
+
+            <li class="nav-item" [ngClass]="{'active': selectedCardIdList.length }">
+                <a class="nav-link" [ngClass]="{'active': selectedCardIdList.length }"
+                    (click)="openActionAlert(5)">Redeem</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="marketplace-cards content-block card">
+        <div class="card-head">
+            <app-my-drecs-filter></app-my-drecs-filter>
+        </div>
+
+        <div class="marketplace-grid">
+            <div *ngFor="let marketplaceCard of marketplaceCardList" class="marketplace-card">
+                <div class="card">
+                    <span class="marketplace-counts card-balance">{{marketplaceCard.cardBalance}}</span>
+                    <img class="selected-icon" (click)="onSelectCard(marketplaceCard)" [src]="
+                selectedCardIdList.includes(marketplaceCard.id)
+                ? 'assets/img/marketplace/item-selection.svg'
+                : 'assets/img/marketplace/item-selected.svg'
+            " alt="" />
+                    <div class="image">
+                        <img [src]="marketplaceCard.image" alt="" />
+                        <div class="overlay h-100 w-100" *ngIf="selectedCardIdList.includes(marketplaceCard.id)"></div>
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <h1>Select quantity</h1>
+                            <input numbersOnly type="text" class="input-box" [value]="marketplaceCard.selectedQuantity">
+                        </div>
+                        <div class="title">
+                            <div class="custom-range-input">
+                                <input class="range-input" type="range" name="range" id="Bar" min="0" max="100"
+                                    [(ngModel)]="marketplaceCard.selectedQuantity"
+                                    (ngModelChange)="onSelection($event,marketplaceCard)" size="200px" />
+                                <span
+                                    [ngStyle]="{left: marketplaceCard.selectedQuantity + '%', transform: 'translate(-'+ marketplaceCard.selectedQuantity +'%, 0%)'}">
+                                    {{marketplaceCard.selectedQuantity}}%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-set-list-price-alert [showAlert]="showSetPriceAlert" (closeEvent)="onCloseSetPriceAlert($event)">
+</app-set-list-price-alert>
+
+<app-action-confirmation-alert [showActionAlert]="showActionAlert" [actionId]="actionId"
+    (closeEvent)="onCloseActionAlert($event)">
+</app-action-confirmation-alert>

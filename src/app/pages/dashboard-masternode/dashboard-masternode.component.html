@@ -1,0 +1,43 @@
+<div class="content-block">
+
+    <div class="main-content">
+
+        <div class="card mb-4">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col">
+                        <div class="balance-card py-3 px-4">
+                            <p class="mb-2">DRECs Balance</p>
+                            <h3 class="mb-0">{{drecsBalance|digitString}}</h3>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="border-start balance-card py-3 px-4">
+                            <p class="mb-2">$USD Balance</p>
+                            <h3 class="mb-0">${{usdBalance|digitString}}</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <app-energy-consumprion-chart></app-energy-consumprion-chart>
+        </div>
+
+        <div class="row mb-4">
+            <app-rewards-chart></app-rewards-chart>
+        </div>
+
+        <div class="mb-4">
+          <app-count-meter-box></app-count-meter-box>
+        </div>
+
+        <div class="row mb-4">
+            <app-energy-offset-statistics-chart></app-energy-offset-statistics-chart>
+        </div>
+
+    </div>
+
+</div>

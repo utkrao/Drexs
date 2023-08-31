@@ -1,0 +1,85 @@
+<app-my-wallet-tab-list [currentTab]="3"></app-my-wallet-tab-list>
+
+<div class="card content-block" >
+<div class="loader-wrap" *ngIf="loading">
+    <app-loader></app-loader>
+</div>
+<div class="tab-content" *ngIf="!loading">
+    <div class="tab-pane fade show active">
+        <div class="table-responsive">
+            <table class="table align-middle drex-table gray">
+                <thead>
+                    <tr>
+                        <th scope="col">Sl No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">
+                            <span>Type</span>
+                            <button class="btn-sort" type=""><img src="assets/img/icon-sort-by-table.svg"
+                                    alt="sort table" /></button>
+                        </th>
+                        <th scope="col">Wallet ID</th>
+                        <th scope="col">
+                            <span>Amount</span>
+                            <button class="btn-sort" type=""><img src="assets/img/icon-sort-by-table.svg"
+                                    alt="sort table" /></button>
+                        </th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of history ; let i = index">
+                        <td>{{ ((page-1)*limit)+(i+1)}}</td>
+                        <td>{{item.transactionDate | date:'d MMMM y' }}</td>
+                        <td class="dark">{{item.transactionType}}</td>
+                        <td>{{item.toAddress}}</td>
+
+                        <!-- <td [ngClass]="{'profit': item.change === '+', 'loss' : item.change === '-' }">
+                            {{item.change}} {{item.amount}} {{item.coinCode}}
+                        </td> -->
+                        <ng-container *ngIf="item.transactionType === 'Buy';else sendTxn">
+                            <td [ngClass]="{'completed': item.transactionStatus == 'Completed' || item.transactionStatus == 'Success', 'failed': item.transactionStatus == 'Failed', 'processing': item.transactionStatus == 'Pending'}">
+                                {{item.change}} {{item.amount}} {{item.coinCode}}
+                            </td>
+                        </ng-container>
+
+                        <ng-template #sendTxn>
+                            <ng-container *ngIf="item.transactionType === 'Send';else receivedTxn">
+                                <td [ngClass]="{'failed': item.transactionStatus == 'Completed' || item.transactionStatus == 'Success' || item.transactionStatus == 'Failed', 'processing': item.transactionStatus == 'Pending'}">
+                                    {{item.change}} {{item.amount}} {{item.coinCode}}
+                                </td>
+                            </ng-container>
+                        </ng-template>
+
+                        <ng-template #receivedTxn>
+                            <ng-container *ngIf="item.transactionType === 'Received';else otherTxn">
+                                <td [ngClass]="{'completed': item.transactionStatus == 'Completed' || item.transactionStatus == 'Success', 'failed': item.transactionStatus == 'Failed', 'processing': item.transactionStatus == 'Pending'}">
+                                    {{item.change}} {{item.amount}} {{item.coinCode}}
+                                </td>
+                            </ng-container>
+                        </ng-template>
+
+                        <ng-template #otherTxn>
+                                <td [ngClass]="{'completed': item.transactionStatus == 'Completed' || item.transactionStatus == 'Success', 'failed': item.transactionStatus == 'Failed', 'processing': item.transactionStatus == 'Pending'}">
+                                    {{item.change}} {{item.amount}} {{item.coinCode}}
+                                </td>
+                        </ng-template>
+
+                        <td>
+                            <div class="status-box">
+
+                                <span class="status"
+                                    [ngClass]="{'completed': item.transactionStatus == 'Completed' || item.transactionStatus == 'Success', 'failed': item.transactionStatus == 'Failed', 'processing': item.transactionStatus == 'Pending'}"></span>
+
+                                {{item.transactionStatus}}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <app-pagination [pagination]="pagination" [currentPage]="page" (changePageEvent)="onPageChange($event)">
+        </app-pagination>
+
+    </div>
+</div>
+</div>

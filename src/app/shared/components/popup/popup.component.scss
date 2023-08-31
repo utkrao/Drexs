@@ -1,0 +1,156 @@
+@import '../../../../scss/variables';
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.modal-content {
+  background-color: $white;
+  border: 0;
+  border-radius: 0;
+  max-width: 480px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.modal-overlap {
+  background-color: rgba($color: $black, $alpha: 0.2);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.modal-head {
+  background-color: $greay-light-100;
+  padding: 2rem 2rem 1rem 2rem;
+
+  h3 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 2.188rem;
+    color: $primary;
+  }
+
+  .close-btn {
+    background-color: transparent;
+    border: 0;
+    padding: 0.25rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+.search-box {
+  position: relative;
+
+  .form-control {
+    border: 1px solid $wall-border;
+    border-radius: 0.5rem;
+    padding: 0.75rem 3rem 0.75rem 1rem;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $greay-light-500;
+  }
+
+  img {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+.beneficiaries-tools {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $border;
+    display: block;
+  }
+
+  .form-select {
+    background-image: url('../../../../assets/img/icon-sort-by.svg');
+    background-repeat: no-repeat;
+    background-position: left 0.313rem center;
+    background-color: $wall-border;
+    border: 0;
+    border-radius: 0.438rem;
+    padding: 0.313rem 0.625rem 0.313rem 1.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.313rem;
+    color: $black;
+    width: auto;
+  }
+}
+
+.beneficiaries-list {
+  margin: 0;
+
+  .beneficiaries-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+
+    .short-name {
+      background-color: $gray-300;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 2.25rem;
+      flex: 1 0 auto;
+    }
+
+    .details {
+      flex: 1 1 auto;
+      padding: 0 1.25rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      h4 {
+        font-weight: 500;
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+        color: $black;
+        margin: 0;
+      }
+
+      span {
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: $greay-light-500;
+      }
+    }
+
+    .remove-link {
+      font-weight: 500;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      color: $primary;
+    }
+  }
+}

@@ -1,0 +1,102 @@
+<app-my-wallet-tab-list [currentTab]="1"></app-my-wallet-tab-list>
+
+<div class="card content-block">
+  <div class="loader-wrap" *ngIf="loading">
+    <app-loader></app-loader>
+  </div>
+  <div class="tab-content" *ngIf="!loading">
+    <div class="tab-pane fade show active">
+      <div class="table-responsive">
+        <table class="table align-middle drex-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col" class="text-end">Price</th>
+              <th scope="col" class="text-end">24h</th>
+              <th scope="col" class="text-end">Balance</th>
+              <th scope="col" class="text-end">USD Value</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="walletAssetList">
+            <tr *ngFor="let item of walletAssetList.data | keyvalue">
+              <th>
+                <div class="d-flex">
+                  <div class="coin-view">
+                    <img
+                      src="assets/img/t-icon-watt-coin.png"
+                      alt="Watt Coin"
+                      *ngIf="item.key === 'WATT'"
+                    />
+                    <img
+                      src="assets/img/t-icon-drexs-nft.png"
+                      alt="Drexs NFT"
+                      *ngIf="item.key === 'DREXS'"
+                    />
+                    <img
+                      src="assets/img/t-icon-ethereum.png"
+                      alt="Ethereum"
+                      *ngIf="item.key === 'ETH'"
+                    />
+                    <img
+                      src="assets/img/t-icon-bitcoin.png"
+                      alt="Bitcoin"
+                      *ngIf="item.key === 'BTC'"
+                    />
+                    <span>{{ item.value.coinCode }}</span>
+                    <small>
+                      {{
+                        item.value.coinCode == "DREXS"
+                          ? "NFT"
+                          : item.value.coinCode
+                      }}
+                    </small>
+                  </div>
+                  <div class="coin-address-view ms-3">
+                    <small>
+                      {{ item.value.address }}
+                    </small>
+                  </div>
+                </div>
+              </th>
+              <td class="text-end">${{ item.value.fiatValue || 0 }}</td>
+              <td class="text-end profit">{{ item.value.coinValue || 0 }}%</td>
+              <td class="text-end">{{ item.value.tokenBalance || 0 }}</td>
+              <td class="text-end">${{ item.value.fiatBalance || 0 }}</td>
+              <td>
+                <div class="table-btn-group">
+                  <button
+                    class="btn btn-primary btn-sm light"
+                    (click)="buy(item.key)"
+                    *ngIf="item.key === 'WATT' || item.key === 'DREXS'"
+                  >
+                    Buy
+                  </button>
+                  <button
+                    class="btn btn-primary btn-sm light"
+                    (click)="send(item.key, item.value)"
+                  >
+                    Send
+                  </button>
+                  <button
+                    class="btn btn-primary btn-sm light"
+                    (click)="swap(item.key, item.value)"
+                    *ngIf="item.key === 'WATT'"
+                  >
+                    Swap
+                  </button>
+                  <button
+                    class="btn btn-primary btn-sm light"
+                    (click)="receive(item.key)"
+                  >
+                    Receive
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

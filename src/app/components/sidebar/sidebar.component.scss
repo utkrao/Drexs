@@ -1,0 +1,244 @@
+@import '../../../scss/variables';
+
+.sidebar {
+  background-color: $white;
+  float: left;
+
+  .menu {
+    min-width: 228px;
+    padding: 1.5rem 0;
+    flex-grow: 1;
+    overflow: auto;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    background-color: #F6F6F6;
+    border-right: 1px solid $wall-border;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    >span {
+      display: block;
+      font-weight: 500;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      letter-spacing: 0.15rem;
+      color: $greay-light-300;
+      text-transform: uppercase;
+      margin: 0 0 1rem 30px;
+    }
+  }
+
+  .brand-name {
+    display: block;
+    padding: 12px 30px;
+    border-bottom: 1px solid #E3E3E3;
+  }
+
+  .menubar {
+
+    li {
+      margin: 0.5rem auto;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      a {
+        display: block;
+        width: 100%;
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: $greay-light-500;
+        white-space: nowrap;
+        text-decoration: none;
+        position: relative;
+        padding: 0.5rem 0.75rem 0.5rem 30px;
+        border-radius: 0.625rem;
+        min-height: 43px;
+
+        span {
+          display: inline-block;
+          margin-left: 1rem;
+        }
+
+        &.active {
+          background-color: rgba($primary, .1);
+          color: $black;
+          border-radius: 0;
+          border-right: 3px solid $primary;
+
+          svg {
+            path {
+              fill: $primary;
+            }
+          }
+        }
+      }
+
+      .submenu {
+        border-left: 2px solid $card-border;
+        padding-left: 1.25rem;
+        margin-left: 1.375rem;
+
+        li {
+          margin: 0.5rem auto;
+
+          a {
+            &.active {
+              background-color: transparent;
+              color: $primary;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .menu-user {
+    flex-grow: 1;
+    overflow: auto;
+    font-family: $mulish;
+    min-width: 228px;
+    background-color: #F6F6F6;
+    padding-top: 15px;
+
+    >span {
+      display: block;
+      font-weight: 500;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      letter-spacing: 0.15rem;
+      color: $greay-light-300;
+      text-transform: uppercase;
+      margin: 0 0 1rem 1rem;
+    }
+
+    .menubar {
+      >li {
+        // padding-right: 0.5rem;
+
+        >a {
+          color: $usm-black;
+
+          svg {
+            path {
+              fill: $usm-black;
+            }
+          }
+
+          &.active {
+            background-color: $primary-light;
+            font-weight: 700;
+            color: $primary;
+
+            // &::before {
+            //   content: '';
+            //   background-color: $primary;
+            //   border-radius: 4px 0px 0px 4px;
+            //   width: 4px;
+            //   height: 100%;
+            //   position: absolute;
+            //   top: 0;
+            //   bottom: 0;
+            //   left: calc(100% + 4px);
+            // }
+
+            svg {
+              path {
+                fill: $primary;
+              }
+            }
+          }
+        }
+      }
+
+      li {
+
+        .submenu {
+          border: 0px solid transparent;
+          position: relative;
+
+          &::before {
+            content: '';
+            background-color: $wall-border;
+            width: 2px;
+            height: calc(100% - 40px);
+            position: absolute;
+            top: 20px;
+            right: calc(100% - 2px);
+          }
+
+          li {
+            position: relative;
+            margin: 0.5rem auto;
+
+            &::before {
+              content: '';
+              background-color: $wall-border;
+              border-radius: 0.125rem;
+              width: 22px;
+              height: 2px;
+              position: absolute;
+              top: calc(50% - 1px);
+              right: calc(100% - 2px);
+            }
+
+            a {
+              color: $usm-black;
+
+              &.active {
+                background-color: transparent;
+                font-weight: 700;
+                color: $primary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width:1200px) {
+    width: 68px;
+    overflow: hidden;
+
+    .menu>span {
+      margin-left: 15px;
+    }
+
+    .brand-name {
+      padding: 12px 22px;
+      clip-path: circle(40%);
+    }
+
+    .menubar li a {
+      padding-left: 23px;
+    }
+
+  }
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.logo {
+  height: 35px;
+  width: 150px;
+  display: block;
+}

@@ -1,0 +1,31 @@
+<div class="content-block">
+  
+    <div class="content-tabs card">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/certificates/my-certificates"
+                    [ngClass]="{'active': currentTab == 1}" (click)="currentTab = 1">My Certificates
+                    <span class="badge badge-primary ms-2">132,456</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/certificates/my-drecs" [ngClass]="{'active': currentTab == 2 }"
+                    (click)="currentTab = 2">My Drecs
+                    <span class="badge badge-primary ms-2">132,456</span>
+                </a>
+            </li>
+    
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/certificates/stacked-drecs"
+                    [ngClass]="{'active': currentTab == 3 }" (click)="currentTab = 3">Staked Drecs
+                    <span class="badge badge-primary ms-2">100</span>
+                </a>
+            </li>
+        </ul>
+    
+    </div>
+    
+    <router-outlet> </router-outlet>
+
+  </div>
+  

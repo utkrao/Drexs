@@ -1,0 +1,41 @@
+<div class="onboarding-wrap h-100">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col px-0 h-100">
+        <div class="onboarding-content h-100 overflow-auto">
+          <div class="onboarding-container">
+            <div class="onboarding-brand my-3 pb-4">
+              <img src="assets/img/drexs-logo.svg" alt="dRexs" />
+            </div>
+            <div class="onboarding-head my-4">
+              <h2>OTP Verification</h2>
+              <p>We have sent an OTP to your Phone Number or Email ID</p>
+            </div>
+            <div class="onboarding-form">
+              <div class="otp-wrapper">
+                <ng-otp-input (onInputChange)="pinChange($event)" [config]="config"></ng-otp-input>
+              </div>
+              <div class="otp-action d-flex justify-content-between">
+                <span>OTP expires in <countdown #cd [config]="{ leftTime: 180, format: 'm:s', notify: 0 }"
+                    (event)="handleEvent($event)"></countdown>
+                </span>
+                <a [ngClass]="{'disabled-link' : !expired}" (click)="resendOtp()">Resend OTP <div class="btn-loader"
+                    *ngIf="resending"> </div> </a>
+              </div>
+              <button type="button" class="btn btn-primary btn-lg w-100" (click)="verifyOtp()" [disabled]="expired">
+                Verify
+                OTP
+                <div class="btn-loader" *ngIf="loading"> </div>
+              </button>
+              <br />
+              <a (click)="onBack()" class="btn btn-link btn-sm text-black">Back</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

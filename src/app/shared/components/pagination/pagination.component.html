@@ -1,0 +1,38 @@
+<div class="d-flex align-items-center justify-content-between table-foot">
+ 
+  <span style="width: 120px;">
+    <ng-select [searchable]="false" [clearable]="false" [items]="pageLimitList" bindLabel="label"
+    [(ngModel)]="selectedPageLimit" bindValue="value">
+    </ng-select>
+  </span>
+
+  
+  <nav aria-label="Page navigation example" class="align-items-center d-flex">
+    <span class="me-3">{{ fromRecord }}-{{ toRecord }} of {{ pagination.count }}</span>
+    <ul class="pagination" *ngIf="pagination?.total_page > 1">
+      <li [ngClass]="{ disabled: !pagination.has_previous }" class="page-item">
+        <a class="page-link" (click)="changePage(1)"
+          ><img src="assets/img/chevron-left.svg" alt="Previous"
+        /></a>
+      </li>
+
+      <!-- <ng-container *ngFor="let pNumber of pageNumberList">
+        <li class="page-item" [ngClass]="{ active: currentPage === pNumber }">
+          <a class="page-link" (click)="changePage(pNumber)">{{ pNumber }}</a>
+        </li>
+      </ng-container> -->
+
+      <ng-container *ngFor="let pObj of pageNumbersList">
+        <li class="page-item" [ngClass]="{ active: currentPage === pObj.pageNo }">
+          <a class="page-link" (click)="changePage(pObj.pageNo)">{{ pObj.label }}</a>
+        </li>
+      </ng-container>
+
+      <li [ngClass]="{ disabled: !pagination.has_next }" class="page-item">
+        <a class="page-link" (click)="changePage(pagination.total_page)"
+          ><img src="assets/img/chevron-right.svg" alt="Next"
+        /></a>
+      </li>
+    </ul>
+  </nav>
+</div>

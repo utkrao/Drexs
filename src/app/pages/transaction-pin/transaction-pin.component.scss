@@ -1,0 +1,52 @@
+@import "../../../scss/variables";
+
+.card{
+    background: $white;
+    border: 1px solid $wall-border;
+    box-shadow: 0 0.25rem 1.5rem rgba(0, 0, 0, 0.07);
+    border-radius: 0.25rem;
+    margin: 0 auto;
+    max-width: 500px;
+    width: 100%;
+}
+
+.card-header{
+    background-color: $white;
+    border-bottom: 1px solid $wall-border;
+    padding: 1.25rem 2.5rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 2.188rem;
+    color: $black;
+}
+
+.card-body{
+    padding: 1.25rem 2.5rem;
+}
+
+.card-text{
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: $gray-base;
+}
+
+.otp-wrapper{
+    margin: 1.5rem 0;
+
+    .otp-input{
+        border-color: $border;
+        border-radius: 0.375rem;
+        padding: 0.688rem 1.125rem;
+        font-weight: 500;
+        font-size: 1.25rem;
+        line-height: 1.5;
+
+        &:focus{
+            border-color: $primary;
+            box-shadow: 0 0.25rem 0.625rem 0.188rem rgba(0, 0, 0, 0.11);
+            outline: none;
+        }
+    }
+
+}

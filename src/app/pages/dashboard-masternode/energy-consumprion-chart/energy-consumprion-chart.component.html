@@ -1,0 +1,26 @@
+<div class="content-block card">
+    <div class="card-head d-flex align-items-start">
+        <div class="d-flex flex-grow-1">
+            <h3>Live Energy Consumption Tracker</h3>
+
+            <div class="ms-3 col-2">
+                <ng-select [searchable]="false" [clearable]="false" [items]="filterList" bindLabel="label"
+                [(ngModel)]="selectedFilter" bindValue="value">
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="ms-3" style="width: 120px;">
+            <ng-select [searchable]="false" [clearable]="false" [items]="durationList" bindLabel="label"
+            [(ngModel)]="selectedDuration" bindValue="value">
+            </ng-select>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div class="chart-container">
+            <canvas id="MyChart">{{ chart }}</canvas>
+        </div>
+
+    </div>
+</div>

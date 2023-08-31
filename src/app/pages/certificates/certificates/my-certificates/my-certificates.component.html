@@ -1,0 +1,136 @@
+<div class="content-block card">
+  <div class="section-head"></div>
+  <div class="content-tabs">
+    <div class="loader-wrap" *ngIf="loading">
+      <app-loader></app-loader>
+    </div>
+
+    <div class="card-head certificate-header">
+      <div class="row">
+        <div class="col-md-8 d-flex align-items-center">
+          <div class="pe-3">
+            <div class="form-group mb-2">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="item-all"
+                [(ngModel)]="allListSelected"
+                (ngModelChange)="onSelectAllList($event)"
+              />
+              <label for="item-all">&nbsp;Select All &nbsp;&nbsp;|&nbsp;&nbsp; Select Quantity</label>
+            </div>
+          </div>
+          <div class="col-3 pe-3">
+            <div class="form-group">
+              <input
+                disabled
+                numbersOnly
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedQuantity"
+              />
+            </div>
+          </div>
+          <div class="col-3 pe-3">
+            <div class="custom-range-input mb-4">
+              <input
+                class="range-input"
+                type="range"
+                name="range"
+                id="Bar"
+                min="0"
+                max="100"
+                [(ngModel)]="selectedQuantityPer"
+                (ngModelChange)="onSelection($event)"
+                size="200px"
+              />
+              <span
+                [ngStyle]="{
+                  left: selectedQuantityPer + '%',
+                  transform: 'translate(-' + selectedQuantityPer + '%, 0%)'
+                }"
+              >
+                {{ selectedQuantityPer }}%
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex flex-grow-1 justify-content-end ">
+          <div class="col">
+            <app-my-certificate-filter></app-my-certificate-filter>
+          </div>
+          <div class="ms-3">
+            <button
+              (click)="openAlert()"
+              class="btn btn-primary btn-sm ms-auto"
+              [disabled]="!selectedIdList.length"
+            >
+              Generate DRECs
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" *ngIf="!loading">
+      <div class="tab-pane fade show active">
+        <div class="table-responsive">
+          <table class="table align-middle drex-table gray">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="item-all"
+                    [(ngModel)]="allSelected"
+                    (ngModelChange)="onSelectAll($event)"
+                  />
+                </th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Certificate ID</th>
+                <th scope="col">Country</th>
+                <th scope="col">Technology</th>
+                <th scope="col">Status</th>
+                <th scope="col">Expiry Date</th>
+                <th scope="col">Days to Expiry</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of myCertificateList; index as i">
+                <td>
+                  <input
+                    [checked]="selectedIdList.includes(item.id)"
+                    type="checkbox"
+                    class="form-check-input"
+                    id="item-{{ item.id }}"
+                    (change)="onItemSelect($event, item.id)"
+                  />
+                </td>
+                <td>{{ item.issueData }}</td>
+                <td>{{ item.certificateId }}</td>
+                <td>{{ item.country }}</td>
+                <td>{{ item.technology }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.expiryDate }}</td>
+                <td>{{ item.daysToExpiry }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <app-pagination
+          [pagination]="pagination"
+          [currentPage]="page"
+          (changePageEvent)="onPageChange($event)"
+        >
+        </app-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-generate-drecs-alert
+  [showAlert]="showAlert"
+  (closeEvent)="onCloseAlert($event)"
+>
+</app-generate-drecs-alert>

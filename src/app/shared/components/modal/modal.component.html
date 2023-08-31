@@ -1,0 +1,305 @@
+<div class="dialog-wrapper" [ngSwitch]="action">
+
+  <div class="dialog-container" *ngSwitchCase="'send'">
+    <div class="dialog-head">
+      <div class="dialog-heading">
+        <h3>Send {{type}} {{type == 'DREXS'? 'NFT': 'Coin'}}</h3>
+        <p>Enter the amount of {{type}} you would like to send</p>
+      </div>
+      <button class="close-btn btn btn-link" type="button" (click)="close(type)">
+        <span class="me-2">Close</span>
+        <img src="assets/img/icon-close-white.svg" alt="Icon" />
+      </button>
+    </div>
+
+      <!-- <div class="text-danger error-msg" *ngIf="errorMessage">
+            {{errorMessage}}
+      </div> -->
+    <form [formGroup]="sendForm" (ngSubmit)="onSubmit(sendForm)">
+      <div class="dialog-body">
+        <div class="row align-items-end">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="basic-url" class="form-label">
+                Amount in {{type}}
+                <span class="text-danger error-msg"
+                  *ngIf="sendForm.get('amount').errors?.required && (sendForm.get('amount').dirty || sendForm.get('amount').touched)">
+                  Required
+                </span>
+                <span class="text-danger error-msg"
+                *ngIf="sendForm.get('amount').errors?.max && (sendForm.get('amount').dirty || sendForm.get('amount').touched)">
+                You have no enough balance (Balance {{sendForm.get('amount').errors?.max?.max}} {{type}})
+              </span>
+              </label>
+              <div class="input-group">
+                <input type="number" class="form-control large" formControlName="amount" placeholder="Enter Amount"
+                  aria-label="Amount" aria-describedby="basic-addon2"
+                  [ngClass]="{'is-invalid': sendForm.get('amount').invalid && (sendForm.get('amount').dirty || sendForm.get('amount').touched)}">
+                <span class="input-group-text input-suffix border-0" id="basic-addon2">{{type}}</span>
+              </div>  
+            </div>
+            <!-- <div class="text-danger error-msg"
+              *ngIf="sendForm.get('amount').errors?.required && (sendForm.get('amount').dirty || sendForm.get('amount').touched)">
+              Amount is required
+            </div> -->
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+            <label for="basic-url" class="form-label">
+               Recipient's Wallet ID
+              <span class="text-danger error-msg"
+                *ngIf="sendForm.get('name').errors?.required && (sendForm.get('name').dirty || sendForm.get('name').touched)">
+                Required
+              </span>
+
+              <span class="text-danger error-msg"
+              *ngIf="invalidWalletId && (sendForm.get('name').dirty || sendForm.get('name').touched)">
+              No result found
+              </span>
+
+            </label>
+            <div class="position-relative">
+              <div class="input-group">
+                <input type="text" class="form-control large" formControlName="name" placeholder="Enter Recipient's Address"
+                  aria-label="Recipient's Aadress" aria-describedby="button-addon2"
+                  (ngModelChange)="this.termSub.next($event)"
+                  [ngClass]="{'is-invalid': sendForm.get('name').invalid && (sendForm.get('name').dirty || sendForm.get('name').touched)}">
+                <button class="btn btn-icon input-suffix border-0" type="button" id="button-addon2" (click)="openPopup()">
+                  <img src="assets/img/icon-beneficiaries.svg" alt="Beneficiaries" />
+                </button>
+              </div>
+              </div>
+              <div class="autocomplete-box" *ngIf="userListData">
+                <div class="autocomplete-item">
+                  <span class="recipient-name">{{userListData.name}}</span>
+                  <span class="recipient-id">{{userListData.address}}</span>
+                  <button class="recipient-add" type="button" (click)="addUserBeneficial()">+ Add</button>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="text-danger error-msg"
+              *ngIf="sendForm.get('name').errors?.required && (sendForm.get('name').dirty || sendForm.get('name').touched)">
+              Username is required
+            </div> -->
+          </div>
+          <div class="col-lg-3 mb-3">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="sendForm.invalid || invalidWalletId || !userListData">Continue
+              <div class="btn-loader" *ngIf="loading"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="dialog-container" *ngSwitchCase="'receive'">
+    <div class="dialog-head d-flex justify-content-between align-items-start">
+      <div class="dialog-heading">
+        <h3>Receive {{type}} Coin</h3>
+        <p>Share your wallet address with others</p>
+      </div>
+      <button class="btn btn-link btn-sm text-white" type="button" (click)="close(type)">
+        <span class="me-2">Close</span>
+        <img src="assets/img/icon-close-white.svg" alt="Icon" />
+      </button>
+    </div>
+
+    <form [formGroup]="sendForm" (ngSubmit)="onSubmit(sendForm)">
+      <div class="dialog-body">
+        <div class="row align-items-end">
+          <div class="col-lg-4 mb-4">
+            <!-- <label for="basic-url" class="form-label"
+              [ngClass]="{'text-danger': sendForm.get('name').invalid && (sendForm.get('name').dirty || sendForm.get('name').touched)}">Wallet
+              Address</label> -->
+              
+            <div class="form-group">
+              <label for="basic-url" class="form-label">
+                Wallet Address
+              </label>
+              <div class="input-group">
+              <input type="text" class="form-control large" formControlName="name" placeholder="Wallet Address"
+                aria-label="Wallet Address" aria-describedby="button-addon2" [(ngModel)]="publicKey"
+                [attr.disabled]="true ? '' : null">
+              <button class="btn btn-icon input-suffix border-0" type="button" id="button-addon2">
+                <img src="assets/img/icon-copy.svg" alt="Copy" (click)="copy()" />
+              </button>
+            </div>
+          </div>
+          </div>
+          <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]=" correctionLevel"
+            [value]="sendForm.get('name').value" cssClass="coolQRCode" [hidden]="true">
+          </ngx-qrcode>
+          <div class="col-lg-6 mb-4">
+            <div class="form-group">
+            <label for="basic-url" class="form-label">QR Code</label>
+            <div class="row">
+              <div class="col-5">
+                <button type="button" class="btn btn-primary w-100" (click)="downloadQRCode()">Download QR</button>
+              </div>
+              <div class="col-5" *ngIf="isMacPlatform">
+                <button type="button" class="btn btn-primary w-100" (click)="share()">Share QR</button>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="dialog-container" *ngSwitchCase="'buy'">    
+    <div class="dialog-head d-flex justify-content-between align-items-start">
+      <div class="dialog-heading">
+        <h3>Buy {{type}} {{type == 'DREXS'? 'NFT': ''}}</h3>
+
+        <p>Enter the amount of {{type}} {{type == 'DREXS'? 'NFT': ''}} you would like to buy and</p>
+      </div>
+      <button class="btn btn-link btn-sm text-white" type="button" (click)="close(type)">
+        <span class="me-2">Close</span>
+        <img src="assets/img/icon-close-white.svg" alt="Icon" />
+      </button>
+    </div>
+
+  
+    <form [formGroup]="buyForm" (ngSubmit)="onBuySubmit(buyForm)">
+      <div class="dialog-body">
+        <div class="row align-items-end">
+          <div class="col-lg-4 mb-4">
+            <label for="basic-url" class="form-label">
+              Number of {{type}}
+              <span class="text-danger error-msg"
+                *ngIf="buyForm.get('quantity').errors?.required && (buyForm.get('quantity').dirty || buyForm.get('quantity').touched)">
+                Required
+              </span>
+
+              <span class="text-danger error-msg"
+                *ngIf="buyForm.get('quantity').errors?.max && (buyForm.get('quantity').dirty || buyForm.get('quantity').touched)">
+                You can buy {{buyForm.get('quantity').errors?.max?.max}} {{type}}
+              </span>
+
+              <span class="text-danger error-msg"
+                *ngIf="buyForm.get('quantity').errors?.min && (buyForm.get('quantity').dirty || buyForm.get('quantity').touched)">
+                You can buy {{buyForm.get('quantity').errors?.min?.min}} {{type}}
+              </span>
+
+            </label>
+            <div class="input-group">
+              <input type="number" formControlName="quantity" class="form-control"
+                placeholder="Enter number of {{type}}"
+                [ngClass]="{'is-invalid': buyForm.get('quantity').invalid && (buyForm.get('quantity').dirty || buyForm.get('quantity').touched)}"
+                (keyup)="calculateAmount($event, buyForm.get('quantity').value)"
+                (change)="calculateAmount($event, buyForm.get('quantity').value)"
+                >
+              <span class="input-group-text">{{type}}</span>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <label for="basic-url" class="form-label">
+              Amount in USD
+              <span class="text-danger error-msg"
+                *ngIf="buyForm.get('amount').errors?.required &&
+                 (buyForm.get('amount').dirty || buyForm.get('amount').touched)">
+                Required
+              </span>
+            </label>
+            <div class="input-group with-symbol">
+              <input type="number" formControlName="amount" class="form-control"
+               placeholder="Amount in USD" [attr.disabled]="true" />
+              <span class="input-group-text" *ngIf="!loading"><img class="currency-symbol" src="assets/img/icon-doller.svg" alt="$"/> USD</span>
+              <span class="input-group-text" *ngIf="loading">
+                <div class="btn-loader"> </div>
+            </span>
+
+              
+            </div>
+          </div>
+          <div class="col-lg-3 mb-4">
+            <button [disabled]="!buyForm.valid" type="submit" class="btn btn-primary w-100">Continue</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+
+  <div class="dialog-container" *ngSwitchCase="'swap'">    
+    <div class="dialog-head d-flex justify-content-between align-items-start">
+      <div class="dialog-heading">
+        <h3>Swap {{type}}</h3>
+        <p>Enter the amount of {{type}} you would like to swap</p>
+      </div>
+      <button class="btn btn-link btn-sm text-white" type="button" (click)="close(type)">
+        <span class="me-2">Close</span>
+        <img src="assets/img/icon-close-white.svg" alt="Icon" />
+      </button>
+    </div>
+  
+    <form [formGroup]="swapForm" (ngSubmit)="onSwapSubmit(swapForm)">
+      <div class="dialog-body">
+        <div class="row align-items-end">
+          <div class="col-lg-4 mb-4">
+            <label for="basic-url" class="form-label">
+              Swap from
+              <span class="text-danger error-msg"
+                *ngIf="swapForm.get('swap_amount').errors?.required && (swapForm.get('swap_amount').dirty || swapForm.get('swap_amount').touched)">
+                Required
+              </span>
+            </label>
+            <div class="input-group">
+              <input type="number" 
+                (keyup)="calculateSwapAmount()"
+                formControlName="swap_amount" class="form-control"
+                placeholder="Enter Amount"
+                [ngClass]="{'is-invalid': swapForm.get('swap_amount').invalid && (swapForm.get('swap_amount').dirty || swapForm.get('swap_amount').touched)}"
+                >
+                <span class="input-group-text p-0" *ngIf="!converting">
+                  <ng-select [items]="swapTypeList" 
+                    bindLabel="title" 
+                    bindValue="code" 
+                    [clearable]="false"
+                    formControlName="from_type"
+                    (change)="onSwapTypeChange()"
+                    [ngClass]="{'is-invalid': swapForm.get('from_type').invalid && (swapForm.get('from_type').dirty || swapForm.get('from_type').touched)}" 
+                    >
+                  </ng-select>
+                </span>
+                <span class="input-group-text" *ngIf="converting">
+                  <div class="btn-loader"> </div>
+              </span>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 mb-4">
+            <label for="basic-url" class="form-label">
+              Amount in {{type}}
+              <span class="text-danger error-msg"
+                *ngIf="swapForm.get('amount').errors?.required && (swapForm.get('amount').dirty || swapForm.get('amount').touched)">
+                Required
+              </span>
+              <span class="text-danger error-msg"
+              *ngIf="swapForm.get('amount').errors?.max && (swapForm.get('amount').dirty || swapForm.get('amount').touched)">
+              You have no enough balance (Balance {{swapForm.get('amount').errors?.max?.max}} {{type}})
+            </span>
+            </label>
+            <div class="input-group">
+              <input type="number" formControlName="amount" class="form-control"
+               placeholder="Amount in {{type}}"
+               [attr.disabled]="true"  />
+              <span class="input-group-text" >{{type}}</span>
+            </div>
+          </div>
+          <div class="col-lg-3 mb-4">
+            <button type="submit" class="btn btn-primary w-100" [disabled]="swapForm.invalid || loading || submitting || converting">Continue <div
+                class="btn-loader" *ngIf="submitting"> </div>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>

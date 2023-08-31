@@ -1,0 +1,56 @@
+<div class="content-block">
+    <div class="section-head">
+        <h2>Contact us</h2>
+        <p>Post your queries in our mail</p>
+    </div>
+    <div class="view-semd-box">
+        <form class="onboarding-form" [formGroup]="contactUsForm" (ngSubmit)="onSubmit(contactUsForm)">
+
+            <div class="mb-3">
+                <label for="userName" class="form-label"
+                    [ngClass]="{'text-danger': contactUsForm.get('userName').invalid && (contactUsForm.get('userName').dirty || contactUsForm.get('userName').touched)}">
+                    Name
+                </label>
+                <input type="text" class="form-control" formControlName="userName" placeholder="Enter name"
+                    [ngClass]="{'is-invalid': contactUsForm.get('userName').invalid && (contactUsForm.get('userName').dirty || contactUsForm.get('userName').touched)}">
+                <div class="text-danger error-msg"
+                    *ngIf="contactUsForm.get('userName').invalid && (contactUsForm.get('userName').dirty || contactUsForm.get('userName').touched)">
+                    Name is required
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="subject" class="form-label"
+                    [ngClass]="{'text-danger': contactUsForm.get('subject').invalid && (contactUsForm.get('subject').dirty || contactUsForm.get('subject').touched)}">
+                    Subject
+                </label>
+                <input type="text" class="form-control" formControlName="subject" placeholder="Enter subject"
+                    [ngClass]="{'is-invalid': contactUsForm.get('subject').invalid && (contactUsForm.get('subject').dirty || contactUsForm.get('subject').touched)}">
+                <div class="text-danger error-msg"
+                    *ngIf="contactUsForm.get('subject').invalid && (contactUsForm.get('subject').dirty || contactUsForm.get('subject').touched)">
+                    Subject is required
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="message" class="form-label"
+                    [ngClass]="{'text-danger': contactUsForm.get('message').invalid && (contactUsForm.get('message').dirty || contactUsForm.get('message').touched)}">
+                    Message
+                </label>
+                <textarea rows="8" class="form-control" formControlName="message" placeholder="Please type your message here"
+                    [ngClass]="{'is-invalid': contactUsForm.get('message').invalid && (contactUsForm.get('message').dirty || contactUsForm.get('message').touched)}">
+                </textarea>
+                <div class="text-danger error-msg"
+                    *ngIf="contactUsForm.get('message').invalid && (contactUsForm.get('message').dirty || contactUsForm.get('message').touched)">
+                    Message is required
+                </div>
+            </div>
+
+
+
+            <button class="btn btn-primary btn-lg w-100" [disabled]="contactUsForm.invalid">
+                Send Mail <div class="btn-loader" *ngIf="loading"> </div>
+            </button>
+        </form>
+    </div>
+</div>

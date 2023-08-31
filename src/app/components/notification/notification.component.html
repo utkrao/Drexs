@@ -1,0 +1,28 @@
+<div class="notification-modal" [ngClass]="{'show': showModal}">
+  <div class="notification-modal-head">
+    <h3>Notifications</h3>
+    <button class="close-modal" type="button" (click)="closeModal()" >
+      <img src="assets/img/icon-close.svg" alt="close" />
+    </button>
+  </div>
+  <div class="notification-body">
+    <div class="notification-section">
+      <span>NEW</span>
+    </div>
+    <ul class="notification-list list-unstyled">
+      <li class="nf-new" *ngFor="let item of newNotificationList">
+        <p>{{item.message}}</p>
+        <span>{{item.time}}</span>
+      </li>
+    </ul>
+    <div class="notification-section">
+      <span>EARLIER</span>
+    </div>
+    <ul class="notification-list list-unstyled">
+      <li *ngFor="let item of notificationList">
+        <p>{{item.message}}</p>
+        <span>{{item.time}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

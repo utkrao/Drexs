@@ -1,0 +1,150 @@
+<div class="onboarding-wrap h-100">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col px-0 h-100">
+        <div class="onboarding-content h-100 overflow-auto">
+          <div class="onboarding-container">
+            <div class="onboarding-brand my-3 pb-4">
+              <div class="row align-items-center">
+                <div class="col">
+                  <a [routerLink]="['/auth/landing']">
+                    <img src="assets/img/drexs-logo.svg" alt="dRexs" />
+                  </a>
+                </div>
+                <div class="col-auto p-0">
+                  <app-back-link></app-back-link>
+                </div>
+              </div>
+            </div>
+            <div class="onboarding-head my-4">
+              <h2>Signup to {{walletTypeTitle|titlecase}} Wallet</h2>
+              <p>Enter your details below to create a {{walletTypeTitle}} wallet for yourself. </p>
+            </div>
+            <form class="onboarding-form" #f="ngForm" [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
+              <div class="mb-3">
+                <label for="firstname" class="form-label"
+                  [ngClass]="{'text-danger': signupForm.get('firstname').errors?.pattern || signupForm.get('firstname').errors?.required && (signupForm.get('firstname').dirty || signupForm.get('firstname').touched)}">First
+                  Name *</label>
+                <input
+                  [ngClass]="{'is-invalid': signupForm.get('firstname').errors?.pattern || signupForm.get('firstname').errors?.required && (signupForm.get('firstname').dirty || signupForm.get('firstname').touched)}"
+                  id="firstname" formControlName="firstname" class="form-control" placeholder="First Name">
+                <div class="text-danger error-msg"
+                  *ngIf="signupForm.get('firstname').errors?.required && (checkBoxChecked || signupForm.get('firstname').dirty || signupForm.get('firstname').touched)">
+                  First Name is required
+                </div>
+                <div class="text-danger error-msg"
+                  *ngIf="signupForm.get('firstname').errors?.pattern && (signupForm.get('firstname').dirty || signupForm.get('firstname').touched)">
+                  First Name is Invalid
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="lastname" class="form-label"
+                  [ngClass]="{'text-danger': signupForm.get('lastname').errors?.pattern || signupForm.get('lastname').errors?.required && (signupForm.get('lastname').dirty || signupForm.get('lastname').touched)}">Last
+                  Name *</label>
+                <input id="lastname"
+                  [ngClass]="{'is-invalid': signupForm.get('lastname').errors?.pattern || signupForm.get('lastname').errors?.required && (signupForm.get('lastname').dirty || signupForm.get('lastname').touched)}"
+                  formControlName="lastname" class="form-control" placeholder="Last Name">
+                <div class="text-danger error-msg"
+                  *ngIf="signupForm.get('lastname').errors?.required && (checkBoxChecked || signupForm.get('lastname').dirty || signupForm.get('lastname').touched)">
+                  Last Name is required
+                </div>
+                <div class="text-danger error-msg"
+                  *ngIf="signupForm.get('lastname').errors?.pattern && (signupForm.get('lastname').dirty || signupForm.get('lastname').touched)">
+                  Last Name is Invalid
+                </div>
+              </div>
+              <div class="segmented-wrap">
+                <div class="segmented-control">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation" (click)="toggleEmail()">
+                      <button class="nav-link" [ngClass]="{'active': isEmail }" id="email-tab" data-bs-toggle="tab"
+                        data-bs-target="#email" type="button" role="tab" aria-controls="email"
+                        aria-selected="true">Email</button>
+                    </li>
+                    <li class="nav-item" role="presentation" (click)="toggleEmail()">
+                      <button class="nav-link" [ngClass]="{'active': !isEmail }" id="phone-tab" data-bs-toggle="tab"
+                        data-bs-target="#phone" type="button" role="tab" aria-controls="phone"
+                        aria-selected="false">Phone</button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade" [ngClass]="{'show': isEmail, 'active': isEmail }" id="email"
+                    role="tabpanel" aria-labelledby="email-tab">
+                    <div class="mb-3">
+                      <label for="email" class="form-label"
+                        [ngClass]="{'text-danger': signupForm.get('email').invalid && (signupForm.get('email').dirty || signupForm.get('email').touched)}">Email
+                        *</label>
+                      <input
+                        [ngClass]="{'is-invalid': signupForm.get('email').invalid && (signupForm.get('email').dirty || signupForm.get('email').touched)}"
+                        id="email" formControlName="email" class="form-control" placeholder="Email">
+                      <div class="text-danger error-msg"
+                        *ngIf="signupForm.get('email').errors?.required && ( checkBoxChecked || signupForm.get('email').dirty || signupForm.get('email').touched)">
+                        Email is required
+                      </div>
+                      <div class="text-danger error-msg"
+                        *ngIf="(signupForm.get('email').errors?.email || signupForm.get('email').errors?.pattern) && (signupForm.get('email').dirty || signupForm.get('email').touched)">
+                        Email is Invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" [ngClass]="{'show': !isEmail, 'active': !isEmail }" id="phone"
+                    role="tabpanel" aria-labelledby="phone-tab">
+                    <div class="mb-3">
+                      <label for="phone" class="form-label"
+                        [ngClass]="{'text-danger': signupForm.get('phone').invalid}">Phone*</label>
+                      <div class="mb-3">
+                        <!-- [enablePlaceholder]="true"  -->
+                        <ngx-intl-tel-input [cssClass]="'form-control'" [preferredCountries]="preferredCountries"
+                          [enableAutoCountrySelect]="true" 
+                          [customPlaceholder]="'7410410123'"
+                          [searchCountryFlag]="true"
+                          [searchCountryField]="[
+                          searchCountryField?.Iso2,
+                          searchCountryField?.Name
+                          ]" [selectFirstCountry]="false" [selectedCountryISO]="countryISO?.India" [maxLength]="15"
+                          [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                          [numberFormat]="phoneNumberFormat?.National" name="phone" formControlName="phone">
+                        </ngx-intl-tel-input>
+                        <div class="text-danger error-msg" *ngIf="signupForm.get('phone').invalid">
+                          Enter valid phone number
+                        </div>
+
+                        <div class="text-danger error-msg"
+                          *ngIf="(!isEmail && !signupForm.get('phone')?.value?.number?.length)">
+                          Phone is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="termsCondition" (change)="checkBox()">
+                <label class="form-check-label" for="termsCondition">Terms and Conditions</label>
+              </div>
+              <div class="mb-4">
+                <button type="submit" class="btn btn-primary btn-lg w-100"
+                  [disabled]="signupForm.invalid || (!isEmail && !signupForm.get('phone')?.value?.number?.length) || !checkBoxChecked">Sign
+                  Up <div class="btn-loader" *ngIf="loading">
+                  </div></button>
+              </div>
+            </form>
+            <div class="onboarding-foot">
+              <span>Already have an account?</span>
+              <ng-container *ngIf="signupId">
+                <a class="text-dark" [routerLink]="['/auth/login']">Login | </a>
+              </ng-container>
+              <a class="text-dark" [routerLink]="['/auth/restore-wallet']">Restore Wallet</a>
+              <br />
+              <!-- <a (click)="onBack()" class="text-dark">Back</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col px-0 d-none d-sm-block">
+        <div class="onboarding-placeholder"></div>
+      </div>
+    </div>
+  </div>
+</div>

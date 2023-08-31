@@ -1,0 +1,75 @@
+<div class="onboarding-wrap h-100">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col px-0 h-100">
+        <div class="onboarding-content h-100 overflow-auto">
+          <div class="onboarding-container">
+            <div class="onboarding-brand my-3 pb-4">
+              <div class="row">
+                <div class="col-md-8">
+                  <a [routerLink]="['/auth/landing']">
+                    <img src="assets/img/drexs-logo.svg" alt="dRexs" />
+                  </a>
+                </div>
+                <div class="col-md-4">
+                  <app-back-link></app-back-link>
+                </div>
+              </div>
+            </div>
+            <div class="onboarding-head my-4">
+              <h2>Reset PIN</h2>
+            </div>
+            <form class="onboarding-form" [formGroup]="passwordForm" (ngSubmit)="onSubmit(passwordForm)">
+              <label class="form-label-info">Set a <strong>4 digit PIN</strong> for your wallet which you will use
+                everytime to initiate a transaction through masternode wallet. </label>
+              <div class="row">
+                <div class="col">
+                  <div class="mb-3">
+                    <label for="pin" class="form-label"
+                      [ngClass]="{'text-danger': passwordForm.get('pin').invalid && (passwordForm.get('pin').dirty || passwordForm.get('pin').touched)}">Set
+                      PIN*</label>
+                    <input numbersOnly type="password" class="form-control" placeholder="Set 4 digit PIN" maxlength="4"
+                      formControlName="pin"
+                      [ngClass]="{'is-invalid': passwordForm.get('pin').invalid && (passwordForm.get('pin').dirty || passwordForm.get('pin').touched)}" />
+                    <div class="text-danger error-msg"
+                      *ngIf="passwordForm.get('pin').invalid && (passwordForm.get('pin').dirty || passwordForm.get('pin').touched)">
+                      Valid PIN is required
+                    </div>
+                    <div class="text-danger error-msg"
+                      *ngIf="passwordForm.value.pin.length != 4 && (passwordForm.get('pin').valid)">
+                      Enter 4 digit pin
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="mb-3">
+                    <label for="cpin" class="form-label"
+                      [ngClass]="{'text-danger': passwordForm.value.pin !== passwordForm.value.cpin && (passwordForm.get('cpin').dirty || passwordForm.get('cpin').touched) || passwordForm.get('cpin').invalid && (passwordForm.get('cpin').dirty || passwordForm.get('cpin').touched)}">Confirm
+                      PIN*</label>
+                    <input numbersOnly type="password" class="form-control" placeholder="Confirm PIN" maxlength="4"
+                      formControlName="cpin"
+                      [ngClass]="{'is-invalid': passwordForm.value.pin !== passwordForm.value.cpin && (passwordForm.get('cpin').dirty || passwordForm.get('cpin').touched) || passwordForm.get('cpin').invalid && (passwordForm.get('cpin').dirty || passwordForm.get('cpin').touched)}" />
+                    <div class="text-danger error-msg"
+                      *ngIf="passwordForm.get('cpin').invalid && (passwordForm.get('cpin').dirty || passwordForm.get('cpin').touched)">
+                      Confirm PIN is required
+                    </div>
+                    <div class="text-danger error-msg"
+                      *ngIf="passwordForm.value.pin !== passwordForm.value.cpin && (passwordForm.get('cpin').dirty || passwordForm.get('cpin').touched)">
+                      PIN and Confirm PIN must be same
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="
+                  passwordForm.value.pin.length != 4 ||
+                  passwordForm.invalid ||
+                  passwordForm.value.pin !== passwordForm.value.cpin
+                  ">Set a new PIN</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

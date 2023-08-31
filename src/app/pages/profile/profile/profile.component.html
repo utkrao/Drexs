@@ -1,0 +1,141 @@
+<!-- <div class="content-block"> -->
+    <!-- already commented -->
+    <!-- <div class="loader-wrap" *ngIf="loading">
+        <app-loader></app-loader>
+    </div> -->
+    <!-- end -->
+
+    <!-- <div *ngIf="!loading">
+
+        <div class="section-head">
+            <h2>Profile Settings</h2>
+        </div>
+
+        <div class="card-wall">
+            <div class="card-wall-head">
+                <h3>Personal Information</h3>
+            </div>
+            <div class="card-wall-body">
+                <ul class="information-list list-unstyled">
+                    <li class="information-item">
+                        <span class="col-3 info-label">Name</span>
+                        <span class="col-7 info-value">{{userProfile?.name}}</span>
+                    </li>
+                    <li class="information-item">
+                        <span class="col-3 info-label">Email ID</span>
+                        <span class="col-7 info-value">{{userProfile?.email}}</span>
+                    </li>
+                    <li class="information-item" *ngIf="userProfile?.phone">
+                        <span class="col-3 info-label">Contact number</span>
+                        <span class="col-7 info-value">{{userProfile?.phone}}</span>
+                    </li>
+                    <li class="information-item">
+                        <span class="col-3 info-label">Password</span>
+                        <span class="col-7 info-value"><a [routerLink]="['/pages/profile/change-password']">Change Password</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div *ngIf="walletType == 'masternode' " class="card-wall">
+            <div class="card-wall-head">
+                <h3>KYC Verification</h3>
+            </div>
+            <div class="card-wall-body">
+                <ul class="information-list list-unstyled">
+                    <li class="information-item">
+                        <span class="col-3 info-label">KYC Status</span>
+                        
+                        
+                        <span  *ngIf="kycVerified; else notVerified" class="col-7 info-value verified">
+                            <img src="assets/img/verified.svg" width="16" alt="Verified"/> 
+                            Verified
+                        </span>
+                        
+                        <ng-template #notVerified>
+                            <span class="col-7 info-value verified"> -->
+                                <!-- already commented -->
+                                <!-- <img src="assets/img/verified.svg" width="16" alt="Verified"/>  -->
+                                <!-- end -->
+                                <!-- Not Verified
+                            </span>
+                        </ng-template>   
+
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card-wall">
+            <div class="card-wall-head">
+                <h3>Saved Cards</h3>
+            </div>
+
+            <div class="loader-wrap" *ngIf="cardLoading">
+                <app-loader></app-loader>
+            </div>
+            <div class="card-wall-body" *ngIf="!cardLoading">
+                <ul class="information-list list-unstyled">
+                    <li class="information-item" *ngFor="let cardObj of savedCardList ">
+                        <span class="col-3 info-label">{{cardObj?.name}}</span>
+                        <span class="col-4 info-value">Card No - **** **** **** {{cardObj?.last4}}</span>
+                        <span class="col-1 info-value">{{cardObj?.expiryMonth}}/{{cardObj?.expiryYear}}</span>
+                        
+                        <span class="col-4 info-value text-end">
+                            <a (click)="removeCard(cardObj)">Remove
+                            </a>                            
+                        </span>
+                    </li> -->
+                    <!-- already commented -->
+                    <!-- <li class="information-item">
+                        <span class="col-3 info-label">Axis Bank</span>
+                        <span class="col-4 info-value">Card No - 51** **** **** **43</span>
+                        <span class="col-1 info-value">08/2027</span>
+                        <span class="col-4 info-value text-end"><a href="">Remove</a></span>
+                    </li> -->
+                    <!-- end -->
+                <!-- </ul>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+<!-- <div class="content-block">
+    <div class="section-head">
+        <h2>My Wallet</h2>
+        <p>Here inside my wallet is my assets and transaction history</p>
+    </div>
+        <router-outlet> </router-outlet>
+</div> -->
+
+
+
+<div class="content-block">
+  
+    <div class="content-tabs card">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/profile/profile-view"
+                    [ngClass]="{'active': currentTab == 1}" (click)="currentTab = 1">My Profile
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/profile/bidding-history" [ngClass]="{'active': currentTab == 2 }"
+                    (click)="currentTab = 2"> Bidding History
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/profile/current-bids" [ngClass]="{'active': currentTab == 3 }"
+                    (click)="currentTab = 3"> Current bids
+                </a>
+            </li>
+        </ul>
+    
+    </div>
+    
+    <router-outlet> </router-outlet>
+
+  </div>
+  

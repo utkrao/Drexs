@@ -1,0 +1,12 @@
+@import '../../../../scss/variables';
+
+.loader {
+    background-image: url('../../../../assets/img/loader.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 100%;
+    padding: 0.5rem;
+}

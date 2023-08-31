@@ -1,0 +1,35 @@
+<div class="text-center py-3 border-bottom">
+  <div class="mnemonic-container">
+    <div class="d-flex align-items-center">
+      <a [routerLink]="['/auth/landing']">
+        <img src="assets/img/drexs-logo.svg" alt="dRexs" />
+      </a>
+      <div class="ms-auto">
+        <app-back-link></app-back-link>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mnemonic-container">
+  <div class="mnemonic-content">
+    <div class="mnemonic-head border-bottom">
+      <h1>Mnemonic Key</h1>
+    </div>
+    <div class="mnemonic-body">
+      <h2>Enter your Mnemonic Seed Phrase</h2>
+      <p>Type in your seed phrase in the correct order to restore your wallet.</p>
+      <ol class="restore-wallet-list">
+        <li *ngFor="let num of [1,2,3,4,5,6,7,8,9,10,11,12]">
+          <div class="restore-wallet-item" [id]="num">
+            <input type="text" placeholder="Enter Seed" (change)="change($event, num)" />
+          </div>
+        </li>
+      </ol>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-primary-outline btn-lg fix-width" (click)="startOver()">Start over</button>
+        <button class="btn btn-primary btn-lg fix-width" (click)="confirm()">Confirm <div class="btn-loader"
+            *ngIf="loading"> </div></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+{
+    "WATT": {
+      "coinName": "Watt Coin",
+      "coinCode": "WATT",
+      "tokenBalance": "0.00000",
+      "fiatBalance": "NaN",
+      "address": "0xc8b4947d4384e1341e753edcb3c068d1661d9495",
+      "balance": "0"
+    },
+    "DREXS": {
+      "coinName": "Drexs NFT",
+      "coinCode": "DREXS",
+      "contractAddress": "0x6f79FC713B96C0e667d0fD98841C9DFD376d03Df",
+      "tokenBalance": 0,
+      "fiatBalance": "0",
+      "address": "0xc8b4947d4384e1341e753edcb3c068d1661d9495"
+    },
+    "BTC": {
+      "coinName": "Bitcoin",
+      "coinCode": "BTC",
+      "tokenBalance": "0.00000",
+      "fiatBalance": "NaN",
+      "address": "mjGeCVr95Gpa5T9tTVpkHD4ThWaRUgf9Na",
+      "txrefs": [],
+      "balance": 0
+    },
+    "ETH": {
+      "coinName": "Ethereum",
+      "coinCode": "ETH",
+      "tokenBalance": 0,
+      "fiatBalance": "0",
+      "address": "0xd9276eede35b066f23551bc444dcc78a018b7808"
+    }
+  }

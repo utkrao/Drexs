@@ -1,0 +1,48 @@
+<div class="profile-card w-100 content-block card p-0">
+    <img class="cover-image" src="/assets/img/cover-image.png" alt="cover">
+    <div class="profile-header  position-relative d-flex justify-content-between flex-wrap align-items-center">
+        <div class="user-details d-flex align-items-center">
+            <img src="/assets/img/profile-pic.png" class="profile-pic" alt="pic">
+            <div class="details">
+                <h4>Micheal Scott</h4>
+                <div class="id d-flex align-items-center">
+                    <span class="info-label">{{userProfile?._id}}</span>
+                    <img src="/assets/img/icon-copy2.svg" (click)="copy()">
+                </div>
+            </div>
+        </div>
+        <div class="actions mt-2 d-flex flex-direction-row">
+            <button class="btn btn-outline mx-3 cancel" (click)="cancel()">Cancel</button>
+            <button class="btn btn-primary save" (click)="save()">Save</button>
+        </div>
+    </div>
+    <div class="more-details w-100 row">
+            <div class="information-item col-6">
+                <span class="info-label col-5">Email</span>
+                <span class="info-value col-5">{{userProfile?.email}}</span>
+            </div>
+            <div class="information-item col-6">
+                <span class="info-label col-5">Alternative contact email</span>
+                <span class="info-value col-5">michealscott123@drex.io</span>
+                <img src="/assets/img/edit-icon.svg">
+            </div>
+            <div class="information-item col-6">
+                <span class="info-label col-5">First Name</span>
+                <span class="info-value col-5">{{userProfile?.name.split(' ')[0]}}</span>
+            </div>
+            <div class="information-item col-6">
+                <span class="info-label col-5">Last Name</span>
+                <span class="info-value col-5">{{userProfile?.name.split(' ').at(-1)}}</span>
+            </div>
+            <div class="information-item col-6">
+                <span class="info-label col-5">Country</span>
+                <span class="info-value col-5">UAE</span>
+            </div>
+            <div class="information-item col-6">
+                <span class="info-label col-5">Phone</span>
+                <span class="info-value col-5">+971 98765 43210</span>
+                <img src="/assets/img/edit-icon.svg">
+            </div>
+    </div>
+</div>
+

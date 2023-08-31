@@ -1,0 +1,104 @@
+<div class="filter-dd-style">
+  <div class="filter-input-dropdown" (click)="toggleFilter()">
+      Filter
+  </div>
+  <div class="filter-dropdown" *ngIf="showFilter">
+      
+      <form [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
+  
+          <div>
+            <div>
+              <h1>Technology</h1>
+            </div>
+
+            <div class="input-group checkbox-group">
+              <div
+                class="mb-3 form-check"
+                *ngFor="let techObj of technologyList; let i=index"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="{{ techObj.label }}"
+                  [value]="techObj.value"
+                  (change)="onTechnologyChange($event)"
+                  [checked]="filterForm.controls.selectedTechnology.value.includes(techObj.value)"
+                />
+                <label class="form-check-label" for="{{ techObj.label }}">
+                  {{ techObj.label }}
+                </label>
+              </div>
+            </div>
+
+            <hr />
+          </div>
+
+          <div>
+            <div>
+              <h1>Date</h1>
+            </div>
+
+            <div class="input-group checkbox-group">
+              <div
+                class="mb-3 form-check"
+                *ngFor="let dateOption of dateFilterOption; let i=index"
+              >
+                <input
+                  type="radio"
+                  [value]="dateOption.value"
+                  class="form-check-input"
+                  id="{{ dateOption.label }}"
+                  formControlName="dateOption"
+                />
+                <label class="form-check-label" for="{{ dateOption.label }}">
+                  {{ dateOption.label }}
+                </label>
+              </div>
+            </div>
+
+            <hr />
+          </div>
+          <div>
+            <div>
+              <h1>Country of Issue</h1>
+            </div>
+            <div class="input-group checkbox-group">
+              <div
+                class="mb-3 form-check"
+                *ngFor="let countryObj of countryList"
+              >
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="{{ countryObj.label }}"
+                  [value]="countryObj.value"
+                  (change)="onCountryChange($event)"
+                  [checked]="filterForm.controls.selectedCountry.value.includes(countryObj.value)"
+                />
+                <label
+                  class="form-check-label"
+                  for="{{ countryObj.label }}"
+                >
+                  {{ countryObj.label }}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-footer">
+            <div class="row">
+              <div class="col-6">
+                <button type="button" (click)="resetFilter()" class="btn btn-outline">
+                  Reset
+                </button>
+              </div>
+              <div class="col-6">
+                <button type="submit" class="btn btn-primary">
+                  Apply Filter
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="content-block card">
+  <div class="section-head"></div>
+  <div class="content-tabs">
+    <div class="loader-wrap" *ngIf="loading">
+      <app-loader></app-loader>
+    </div>
+    <div class="tab-content" *ngIf="!loading">
+      <div class="tab-pane fade show active">
+        <div class="table-responsive">
+          <table class="table align-middle drex-table gray">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">24h</th>
+                <th scope="col">Balance</th>
+                <th scope="col">USD Value</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of walletAssetList.data | keyvalue">
+                <ng-container *ngIf="item.key == 'DREXS'">
+                  <th>
+                    <div class="d-flex">
+                      <div class="coin-view">
+                        <img
+                          src="assets/img/t-icon-drexs-nft.png"
+                          alt="Drexs NFT"
+                          *ngIf="item.key === 'DREXS'"
+                        />
+
+                        <span>{{ item.value.coinCode }}</span>
+                        <small>
+                          {{
+                            item.value.coinCode == "DREXS"
+                              ? "NFT"
+                              : item.value.coinCode
+                          }}
+                        </small>
+                      </div>
+                      <div class="coin-address-view ms-3">
+                        <small>
+                          {{ item.value.address }}
+                        </small>
+                      </div>
+                    </div>
+                  </th>
+                  <td class="text-end">${{ item.value.fiatValue || 0 }}</td>
+                  <td class="text-end profit">
+                    {{ item.value.coinValue || 0 }}%
+                  </td>
+                  <td class="text-end">{{ item.value.tokenBalance || 0 }}</td>
+                  <td class="text-end">${{ item.value.fiatBalance || 0 }}</td>
+                  <td>
+                    <div class="table-btn-group">
+                      <button
+                        class="btn btn-primary btn-sm light"
+                        (click)="buy(item.key)"
+                      >
+                        Buy
+                      </button>
+                      <button
+                        class="btn btn-primary btn-sm light"
+                        (click)="send(item.key, item.value)"
+                      >
+                        Send
+                      </button>
+                      <button
+                        class="btn btn-primary btn-sm light"
+                        (click)="receive(item.key)"
+                      >
+                        Receive
+                      </button>
+                    </div>
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

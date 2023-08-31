@@ -1,0 +1,28 @@
+<div class="content-block">
+  
+    <div class="content-tabs card">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/profile/my-profile"
+                    [ngClass]="{'active': currentTab == 1}" (click)="currentTab = 1">My Profile
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/profile/bidding-history" [ngClass]="{'active': currentTab == 2 }"
+                    (click)="currentTab = 2">Bidding History
+                </a>
+            </li>
+    
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/profile/current-bids"
+                    [ngClass]="{'active': currentTab == 3 }" (click)="currentTab = 3">Current bids
+                </a>
+            </li>
+        </ul>
+    
+    </div>
+    
+    <router-outlet> </router-outlet>
+
+  </div>
+  

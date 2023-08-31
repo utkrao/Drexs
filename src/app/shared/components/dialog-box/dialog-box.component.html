@@ -1,0 +1,74 @@
+<div class="text-center py-3 border-bottom">
+  <img src="assets/img/drexs-logo.svg" alt="dRexs" />
+</div>
+
+<div class="dialog-success-container">
+  <div class="dialog-success-content" [ngSwitch]="type">
+
+    <div class="dialog-success-body text-center" *ngSwitchCase="'signup-complete'">
+     
+      <img src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Wallet Successfully Created</h3>
+     
+      <ng-container *ngIf="walletType == UserType.masternode;  else userWalletBlock">
+        <p>You are just 1 Step away from unlocking the full access to our platform. Please submit your KYC verification to
+          complete your account registration.</p>
+        <button class="btn btn-primary btn-lg w-100">Proceed to Verify KYC</button>
+        <br /> <br />
+        <button class="btn btn-link text-secondary text-decoration-underline w-100" (click)="navigate('/auth/login')">Do
+          it
+          Later
+        </button>
+      </ng-container>
+    
+      <ng-template #userWalletBlock>
+        <p>You are just 1 Step away from unlocking the full access to our platform.</p>
+        <button class="btn btn-primary btn-lg w-100" (click)="navigate('/auth/login')" >Login</button>
+      </ng-template>   
+      </div>
+
+    <div class="dialog-success-body text-center" *ngSwitchCase="'reset-password-complete'">
+      <img src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Password Reset Successful</h3>
+      <p>Hello {{userName}}, you have successfully changed your password we suggest you to note down
+        in your diary for future reference.</p>
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/auth/login')">Back to Login</button>
+      <br /> <br />
+    </div>
+
+    <div class="dialog-success-body text-center" *ngSwitchCase="'restore-wallet-complete'">
+      <img src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Wallet Successfully Restored</h3>
+      <p>You are just 1 Step away from unlocking the full access to our platform.</p>
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/auth/login')">Back to Login</button>
+      <br /> <br />
+    </div>
+ 
+    <div class="dialog-success-body text-center" *ngSwitchCase="'reset-pin-complete'">
+      <img src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>PIN Reset Successful</h3>
+      <p>Hello {{userName}}, you have successfully changed your pin we suggest you to note down
+        in your diary for future reference.</p>
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/dashboard')">Done</button>
+      <br /> <br />
+    </div>
+
+
+    <div class="dialog-success-body text-center" *ngSwitchCase="'purchase-successfull'">
+      <img src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Purchase Successful</h3>
+      <p>Your purchase was successfull. You can see the transaction details in the transaction history tab</p>
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/dashboard')">Go to My DRECs</button>
+      <br /> <br />
+    </div>
+
+    <div class="dialog-success-body text-center" *ngSwitchCase="'bidding-successfull'">
+      <img src="assets/img/icon-successfully.svg" alt="successfully" />
+      <h3>Bidding Successful</h3>
+      <p>Your bidding offer was sent successful to the owner. You will get notification once the owner accepts your offer.</p>
+      <button class="btn btn-primary btn-lg w-100" (click)="navigate('/pages/marketplace')">Go to Marketplace</button>
+      <br /> <br />
+    </div>
+
+  </div>
+</div>

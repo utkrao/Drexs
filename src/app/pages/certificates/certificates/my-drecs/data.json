@@ -1,0 +1,32 @@
+[
+    {
+      "id": "1", "image": "assets/img/marketplace/nuclear.svg", "title": "DREC (NUCLEAR)","company": {"name": "Energy Company 1", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/flag.svg"},"countryFlag": "assets/img/marketplace/flags/flag.svg","price": 1, "cardType": "1", "cardCount": 100
+    },
+    {
+      "id": "2", "image" : "assets/img/marketplace/hydro.svg", "title" : "DREC (HYDRO)","company": {"name": "Energy Company 2", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/india.svg"},"countryFlag": "assets/img/marketplace/flags/india.svg","price": 2, "cardType": "2", "cardCount": 100
+    },
+    {
+      "id": "3", "image" : "assets/img/marketplace/solar.svg", "title" : "DREC (SOLAR)","company": {"name": "Energy Company 3", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/flag2.svg"},"countryFlag": "assets/img/marketplace/flags/flag2.svg","price": 3, "cardType": "3", "cardCount": 100
+    },
+    {
+      "id": "4", "image" : "assets/img/marketplace/geothermal.svg", "title" : "DREC (GEOTHERMAL)","company": {"name": "Energy Company 4", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/brazil.svg"},"countryFlag": "assets/img/marketplace/flags/brazil.svg","price": 4, "cardType": "4", "cardCount": 100
+    },
+    {
+      "id": "5", "image": "assets/img/marketplace/nuclear.svg", "title": "DREC (NUCLEAR)","company": {"name": "Energy Company 1", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/flag.svg"},"countryFlag": "assets/img/marketplace/flags/flag.svg","price": 1, "cardType": "1", "cardCount": 100
+    },
+    {
+      "id": "6", "image" : "assets/img/marketplace/hydro.svg", "title" : "DREC (HYDRO)","company": {"name": "Energy Company 2", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/india.svg"},"countryFlag": "assets/img/marketplace/flags/india.svg","price": 2, "cardType": "2", "cardCount": 100
+    },
+    {
+      "id": "7", "image" : "assets/img/marketplace/solar.svg", "title" : "DREC (SOLAR)","company": {"name": "Energy Company 3", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/flag2.svg"},"countryFlag": "assets/img/marketplace/flags/flag2.svg","price": 3, "cardType": "3", "cardCount": 100
+    },
+    {
+      "id": "8", "image" : "assets/img/marketplace/geothermal.svg", "title" : "DREC (GEOTHERMAL)","company": {"name": "Energy Company 4", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/brazil.svg"},"countryFlag": "assets/img/marketplace/flags/brazil.svg","price": 4, "cardType": "4", "cardCount": 100
+    },
+    {
+      "id": "9", "image": "assets/img/marketplace/nuclear.svg", "title": "DREC (NUCLEAR)","company": {"name": "Energy Company 1", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/flag.svg"},"countryFlag": "assets/img/marketplace/flags/flag.svg","price": 1, "cardType": "1", "cardCount": 100
+    },
+    {
+      "id": "10", "image" : "assets/img/marketplace/hydro.svg", "title" : "DREC (HYDRO)","company": {"name": "Energy Company 2", "totalDrecs": "12,500", "image": "assets/img/marketplace/flags/india.svg"},"countryFlag": "assets/img/marketplace/flags/india.svg","price": 2, "cardType": "2", "cardCount": 100
+    }
+  ]

@@ -1,0 +1,38 @@
+<div class="modal-wrapper" *ngIf="showAlert">
+    <div class="overlay"></div>
+  
+    <div class="modal">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Confirm Generate</h5>
+          <a class="close-button" (click)="closePopup(false)">&times;</a>
+        </div>
+        <div class="card-body">
+          <p class="card-text text-center">
+            Are you sure you want to generate DRECs from the selected certificates?
+          </p>
+  
+          <div class="d-flex card-action gap-4">
+            <button
+              type="button"
+              class="btn btn-outline "
+              (click)="closePopup(false)"
+            >
+              No, Go Back
+              <div class="btn-loader" *ngIf="loading"></div>
+            </button>
+  
+            <button
+              type="button"
+              class="btn btn-primary "
+              (click)="proceed()"
+            >
+              Yes I'm sure
+              <div class="btn-loader" *ngIf="loading"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

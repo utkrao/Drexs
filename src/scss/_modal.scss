@@ -1,0 +1,70 @@
+.modal-wrapper {
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: visible;
+        opacity: 1;
+        z-index: 3;
+    }
+
+    .modal {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 100px;
+
+        .card {
+            margin: auto;
+            max-width: 500px;
+            width: 100%;
+
+            .card-header {
+                padding: 16px 24px;
+                position: relative;
+
+                .card-title {
+                    text-align: center;
+                    margin: 0;
+                    color: #009D94;
+                    font-weight: 500;
+                }
+
+                .close-button {
+                    text-decoration: none;
+                    color: #292D32;
+                    border: 1px solid #292D32;
+                    border-radius: 50%;
+                    height: 20px;
+                    width: 20px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    right: 20px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+
+            .card-body {
+                padding: 20px 24px;
+
+                .card-text {
+                    font-size: 18px;
+                    line-height: normal;
+                }
+            }
+
+            .card-action {
+                margin-top: 34px;
+            }
+
+        }
+    }
+}

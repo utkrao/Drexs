@@ -1,0 +1,49 @@
+<div class="content-block">
+    <div class="section-head">
+      <h2>Staking Activities</h2>
+    </div>
+    <div class="content-tabs">
+      
+      <div class="loader-wrap" *ngIf="loading">
+        <app-loader></app-loader>
+      </div>
+      <div class="tab-content" *ngIf="!loading">
+        <div class="tab-pane fade show active">
+          <div class="table-responsive">
+            <table class="table align-middle drex-table gray">
+              <thead>
+                <tr>
+
+                    <th scope="col">Stake ID</th>
+                    <th scope="col">DREXS NFT</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Earning(Watt)</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of [0,1,2,3,4,5]">
+                  <td>DREXS129308</td>
+                  <td>90</td>
+                  <td>23 Jan 2021</td>
+                  <td>23 Jan 2021</td>
+                  <td>12,000</td>
+
+                </tr>
+              </tbody>
+            </table>
+         
+          </div>
+          <app-pagination
+            [pagination]="pagination"
+            [currentPage]="page"
+            (changePageEvent)="onPageChange($event)"
+            >
+            </app-pagination>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  

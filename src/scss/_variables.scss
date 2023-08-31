@@ -1,0 +1,57 @@
+// Variable overrides
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+// Color system
+
+$white:     #fff;
+$gray-base: #575757;
+$gray-100:  #F5F5F5;
+$gray-200:  #CFCFCF;
+$gray-300:  #c4c9d0;
+$gray-400:  #9F9F9F;
+$gray-500:  #8D8D8D;
+$gray-600:  #828282;
+$gray-700:  #696F79;
+$gray-800:  #454545;
+$gray-900:  #515151;
+$black:     #000000;
+$border:    #8692A6;
+
+$primary:        #009D94;
+$primary-dark:   #007e77;
+$primary-dark-100:#1D605C;
+$primary-light:  #E0F0EF;
+$success:        #18AC0B;
+$danger:         #dc3545;
+$processing:         #FF9D29;
+
+$secondary:      #00779D;
+
+$greay-light:    #FAFAFA;
+$greay-light-100:#F6F6F6;
+$greay-light-200:#F9F9F9;
+$greay-light-300:#ADADAD;
+$greay-light-400:#F1F1F1;
+$greay-light-500:#676767;
+$greay-light-600:#D8D8D8;
+$greay-light-700:#757575;
+$greay-light-900:#969696;
+$wall-border:    #E3E3E3;
+$card-border:    #CBCBCB;
+$input-border:   #DADADA;
+
+// Color system User Mode
+$usm-dark:      #121212;
+$usm-black:     #292929;
+$usm-black-900: #414141;
+$usm-greay:     #8F8F8F;
+$usm-red:       #FF1262;
+$usm-green:     #04C99A;
+
+// Fonts
+$heebo: 'Heebo', sans-serif;
+$mulish: 'Mulish', sans-serif; 
+$monospace: 'IBM Plex Mono', monospace;

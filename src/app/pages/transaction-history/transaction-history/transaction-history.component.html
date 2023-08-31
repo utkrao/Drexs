@@ -1,0 +1,49 @@
+<div class="content-block">
+  
+    <div class="content-tabs card">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/transaction-history/wallet-history"
+                    [ngClass]="{'active': currentTab == 1}" (click)="currentTab = 1">Wallet
+                    <!-- <span class="badge badge-primary ms-2">1234</span> -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/transaction-history/purchases-history" [ngClass]="{'active': currentTab == 2 }"
+                    (click)="currentTab = 2">Purchases
+                    <!-- <span class="badge badge-primary ms-2">1234</span> -->
+                </a>
+            </li>
+    
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/transaction-history/sales-history"
+                    [ngClass]="{'active': currentTab == 3 }" (click)="currentTab = 3">Sales
+                    <!-- <span class="badge badge-primary ms-2">1234</span> -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/transaction-history/redemption"
+                    [ngClass]="{'active': currentTab == 6 }" (click)="currentTab = 6">Redemptions
+                    <!-- <span class="badge badge-primary ms-2">1234</span> -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/transaction-history/earnings-history"
+                    [ngClass]="{'active': currentTab == 4 }" (click)="currentTab = 4">Earnings
+                    <!-- <span class="badge badge-primary ms-2">1234</span> -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pages/transaction-history/withdrawals-history"
+                    [ngClass]="{'active': currentTab == 5 }" (click)="currentTab = 5">Withdrawals
+                    <!-- <span class="badge badge-primary ms-2">1234</span> -->
+                </a>
+            </li>
+        </ul>
+    
+    </div>
+    
+    <router-outlet> </router-outlet>
+
+  </div>
+  

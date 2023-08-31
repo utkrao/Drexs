@@ -1,0 +1,37 @@
+<div class="modal-wrapper" *ngIf="showAlert">
+  <div class="overlay"></div>
+
+  <div class="modal">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Set Price for Listing</h5>
+        <a class="close-button" (click)="closePopup(false)">&times;</a>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="setPriceForm" (ngSubmit)="proceed()">
+          <p class="card-text">Please input price to list them at</p>
+          <div class="form-group">
+            <label>Enter Price</label>
+            <input
+              type="text"
+              numbersOnly
+              class="form-control"
+              formControlName="listPrice"
+            />
+            <button class="input-suffix btn btn-secondary">USD</button>
+          </div>
+          <div class="card-action">
+            <button
+              type="submit"
+              class="btn btn-primary w-50 mx-auto mt-4"
+              (click)="proceed()"
+            >
+              Confirm
+              <div class="btn-loader" *ngIf="loading"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

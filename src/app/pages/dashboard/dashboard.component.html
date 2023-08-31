@@ -1,0 +1,136 @@
+<div class="content-block">
+
+    <div class="section-head">
+        <h2>Dashboard</h2>
+
+            <p *ngIf="lastLogin">
+                Last Login on {{lastLogin| date :'d/MM/yyyy'}} at {{lastLogin| date:'h:mm a'}} 
+            </p>
+       
+    </div>
+
+    <div class="alert alert-success d-flex align-items-center my-4" role="alert">
+        <img class="alert-icon" src="assets/img/icon-alert-ball.svg" alt="Icon" />
+        <div class="alert-content">
+            <h4>KYC Not Verified!</h4>
+            <p>Please complete your KYC verification to start doing transactions in DREXS Masternode Wallet</p>
+        </div>
+        <button type="button" class="btn btn-sm btn-primary text-nowrap">Do your KYC Verification</button>
+    </div>
+
+    <div class="main-content">
+
+        <div class="content-block card mb-4">
+            <div class="card-body">
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>DREXs Balance</h6>
+                            <span>123,455</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>Total Certificates Imported</h6>
+                            <span>250,450</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>Total NFTs Staked</h6>
+                            <span>11,000</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>NFTs In-Progress</h6>
+                            <span>2,000</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>Total NFTs Completed</h6>
+                            <span>9,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>WATT Balance</h6>
+                            <span>3,234</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>Rewards (WATT)</h6>
+                            <span>250,450</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>Total Energy Consumption</h6>
+                            <span>250,450 <sub>mW</sub></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>Energy Staked</h6>
+                            <span>250,000 <sub>mW</sub></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="balance-card">
+                            <h6>Total Staked Energy</h6>
+                            <span>450,000 <sub>mW</sub></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <app-speedometer></app-speedometer>
+            </div>
+
+            <div class="col">
+                <div class="content-block card mb-4">
+                    <div class="card-head">
+                        <h3>DREXS NFTS StAts</h3>
+                        <p>It is a long established fact that a reader will be distracted by the readable </p>
+                    </div>
+                    <div class="card-body text-center">
+                        <img class="img-fluid" src="assets/img/chart-nfts-stats.svg"
+                            alt="DREXS NFTS StAts" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-block card mb-4">
+            <div class="card-head d-flex align-items-start">
+                <div class="flex-grow-1">
+                    <h3>REWARDS</h3>
+                    <p>It is a long established fact that a reader will be distracted by the readable </p>
+                </div>
+                <div class="ms-auto">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Yearly</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                <img class="img-fluid" src="assets/img/chart-rewards.svg" alt="REWARDS" />
+            </div>
+        </div>
+
+    </div>
+
+</div>

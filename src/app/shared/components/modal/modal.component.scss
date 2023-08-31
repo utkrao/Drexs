@@ -1,0 +1,54 @@
+@import '../../../../scss/variables';
+
+.dialog-container {
+  background-color: $primary-dark-100;
+  padding: 2rem 2rem 3rem 2rem;
+  position: absolute;
+  top: auto;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.dialog-head {
+  position: relative;
+  .close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    color: #FFF;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+.dialog-heading {
+  h3 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 2.188rem;
+    color: $white;
+    margin: 0;
+  }
+
+  p {
+    font-weight: 300;
+    font-size: 0.875rem;
+    line-height: 1.75rem;
+    color: $white;
+    margin: 0;
+  }
+}
+
+.dialog-body {
+  padding: 2rem 0 0 0;
+
+  .form-label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.313rem;
+    color: $white;
+  }
+}
